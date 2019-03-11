@@ -100,6 +100,7 @@
     <Compile Include="Workspaces\WorkspaceCreatedEventArgs.cs" />
     <Compile Include="Workspaces\WorkspaceEventArgs.cs" />
     <Compile Include="Workspaces\WorkspaceException.cs" />
+    <Compile Include="Workspaces\WorkspaceModelEnricher.cs" />
     <Compile Include="Workspaces\WorkspaceModelVersion.cs" />
     <Compile Include="Workspaces\WorkspaceModelVersionAttribute.cs" />
     <Compile Include="Workspaces\WorkspaceOpenedEventArgs.cs" />

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Neatly
 {
@@ -21,7 +22,16 @@ namespace Neatly
         public FrmMain()
         {
             InitializeComponent();
+
+            
             InitializeActionComponent();
+            InitializeDockingSurface();
+        }
+
+        private void InitializeDockingSurface()
+        {
+            var navigationWindow = new NavigationWindow();
+            navigationWindow.Show(dockPanel1, DockState.DockLeft);
         }
 
         private void InitializeActionComponent()

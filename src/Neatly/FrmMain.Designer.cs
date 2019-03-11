@@ -28,46 +28,124 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
-            this.mainToolStrip = new System.Windows.Forms.ToolStrip();
-            this.tbtnNewDocument = new System.Windows.Forms.ToolStripButton();
-            this.tbtnOpenDocument = new System.Windows.Forms.ToolStripButton();
-            this.tbtnSaveDocument = new System.Windows.Forms.ToolStripButton();
-            this.mainMenu = new System.Windows.Forms.MenuStrip();
-            this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuNewDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.mnuNewDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOpenDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuSaveDocument = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripContainer.TopToolStripPanel.SuspendLayout();
-            this.toolStripContainer.SuspendLayout();
-            this.mainToolStrip.SuspendLayout();
-            this.mainMenu.SuspendLayout();
+            this.tbtnNewDocument = new System.Windows.Forms.ToolStripButton();
+            this.tbtnOpenDocument = new System.Windows.Forms.ToolStripButton();
+            this.tbtnSaveDocument = new System.Windows.Forms.ToolStripButton();
+            this.menuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // toolStripContainer
+            // statusStrip
             // 
+            resources.ApplyResources(this.statusStrip, "statusStrip");
+            this.statusStrip.Name = "statusStrip";
             // 
-            // toolStripContainer.ContentPanel
+            // BottomToolStripPanel
             // 
-            resources.ApplyResources(this.toolStripContainer.ContentPanel, "toolStripContainer.ContentPanel");
-            resources.ApplyResources(this.toolStripContainer, "toolStripContainer");
-            this.toolStripContainer.Name = "toolStripContainer";
+            resources.ApplyResources(this.BottomToolStripPanel, "BottomToolStripPanel");
+            this.BottomToolStripPanel.Name = "BottomToolStripPanel";
+            this.BottomToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.BottomToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             // 
-            // toolStripContainer.TopToolStripPanel
+            // TopToolStripPanel
             // 
-            this.toolStripContainer.TopToolStripPanel.Controls.Add(this.mainToolStrip);
+            resources.ApplyResources(this.TopToolStripPanel, "TopToolStripPanel");
+            this.TopToolStripPanel.Name = "TopToolStripPanel";
+            this.TopToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.TopToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             // 
-            // mainToolStrip
+            // RightToolStripPanel
             // 
-            resources.ApplyResources(this.mainToolStrip, "mainToolStrip");
-            this.mainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            resources.ApplyResources(this.RightToolStripPanel, "RightToolStripPanel");
+            this.RightToolStripPanel.Name = "RightToolStripPanel";
+            this.RightToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.RightToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            // 
+            // LeftToolStripPanel
+            // 
+            resources.ApplyResources(this.LeftToolStripPanel, "LeftToolStripPanel");
+            this.LeftToolStripPanel.Name = "LeftToolStripPanel";
+            this.LeftToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.LeftToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            // 
+            // ContentPanel
+            // 
+            resources.ApplyResources(this.ContentPanel, "ContentPanel");
+            // 
+            // notifyIcon1
+            // 
+            resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuFile});
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
+            this.menuStrip1.Name = "menuStrip1";
+            // 
+            // mnuFile
+            // 
+            this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuNewDocument,
+            this.mnuOpenDocument,
+            this.toolStripMenuItem1,
+            this.mnuSaveDocument});
+            this.mnuFile.Name = "mnuFile";
+            resources.ApplyResources(this.mnuFile, "mnuFile");
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tbtnNewDocument,
             this.tbtnOpenDocument,
             this.tbtnSaveDocument});
-            this.mainToolStrip.Name = "mainToolStrip";
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
+            this.toolStrip1.Name = "toolStrip1";
+            // 
+            // dockPanel1
+            // 
+            resources.ApplyResources(this.dockPanel1, "dockPanel1");
+            this.dockPanel1.Name = "dockPanel1";
+            // 
+            // mnuNewDocument
+            // 
+            this.mnuNewDocument.Image = global::Neatly.Properties.Resources.page_white;
+            this.mnuNewDocument.Name = "mnuNewDocument";
+            resources.ApplyResources(this.mnuNewDocument, "mnuNewDocument");
+            // 
+            // mnuOpenDocument
+            // 
+            this.mnuOpenDocument.Image = global::Neatly.Properties.Resources.folder_page;
+            this.mnuOpenDocument.Name = "mnuOpenDocument";
+            resources.ApplyResources(this.mnuOpenDocument, "mnuOpenDocument");
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            // 
+            // mnuSaveDocument
+            // 
+            this.mnuSaveDocument.Image = global::Neatly.Properties.Resources.disk;
+            this.mnuSaveDocument.Name = "mnuSaveDocument";
+            resources.ApplyResources(this.mnuSaveDocument, "mnuSaveDocument");
             // 
             // tbtnNewDocument
             // 
@@ -90,88 +168,44 @@
             resources.ApplyResources(this.tbtnSaveDocument, "tbtnSaveDocument");
             this.tbtnSaveDocument.Name = "tbtnSaveDocument";
             // 
-            // mainMenu
-            // 
-            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFile});
-            resources.ApplyResources(this.mainMenu, "mainMenu");
-            this.mainMenu.Name = "mainMenu";
-            // 
-            // mnuFile
-            // 
-            this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuNewDocument,
-            this.mnuOpenDocument,
-            this.toolStripMenuItem1,
-            this.mnuSaveDocument});
-            this.mnuFile.Name = "mnuFile";
-            resources.ApplyResources(this.mnuFile, "mnuFile");
-            // 
-            // mnuNewDocument
-            // 
-            this.mnuNewDocument.Image = global::Neatly.Properties.Resources.page_white;
-            this.mnuNewDocument.Name = "mnuNewDocument";
-            resources.ApplyResources(this.mnuNewDocument, "mnuNewDocument");
-            // 
-            // statusStrip
-            // 
-            resources.ApplyResources(this.statusStrip, "statusStrip");
-            this.statusStrip.Name = "statusStrip";
-            // 
-            // mnuOpenDocument
-            // 
-            this.mnuOpenDocument.Image = global::Neatly.Properties.Resources.folder_page;
-            this.mnuOpenDocument.Name = "mnuOpenDocument";
-            resources.ApplyResources(this.mnuOpenDocument, "mnuOpenDocument");
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
-            // 
-            // mnuSaveDocument
-            // 
-            this.mnuSaveDocument.Image = global::Neatly.Properties.Resources.disk;
-            this.mnuSaveDocument.Name = "mnuSaveDocument";
-            resources.ApplyResources(this.mnuSaveDocument, "mnuSaveDocument");
-            // 
             // FrmMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.toolStripContainer);
+            this.Controls.Add(this.dockPanel1);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.mainMenu);
+            this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
-            this.MainMenuStrip = this.mainMenu;
             this.Name = "FrmMain";
-            this.toolStripContainer.TopToolStripPanel.ResumeLayout(false);
-            this.toolStripContainer.TopToolStripPanel.PerformLayout();
-            this.toolStripContainer.ResumeLayout(false);
-            this.toolStripContainer.PerformLayout();
-            this.mainToolStrip.ResumeLayout(false);
-            this.mainToolStrip.PerformLayout();
-            this.mainMenu.ResumeLayout(false);
-            this.mainMenu.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripContainer toolStripContainer;
-        private System.Windows.Forms.ToolStrip mainToolStrip;
-        private System.Windows.Forms.ToolStripButton tbtnNewDocument;
+        private System.Windows.Forms.ToolStripPanel BottomToolStripPanel;
+        private System.Windows.Forms.ToolStripPanel TopToolStripPanel;
+        private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
+        private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
+        private System.Windows.Forms.ToolStripContentPanel ContentPanel;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnuFile;
-        private System.Windows.Forms.ToolStripButton tbtnOpenDocument;
-        private System.Windows.Forms.ToolStripButton tbtnSaveDocument;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
         private System.Windows.Forms.ToolStripMenuItem mnuNewDocument;
         private System.Windows.Forms.ToolStripMenuItem mnuOpenDocument;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mnuSaveDocument;
+        private System.Windows.Forms.ToolStripButton tbtnNewDocument;
+        private System.Windows.Forms.ToolStripButton tbtnOpenDocument;
+        private System.Windows.Forms.ToolStripButton tbtnSaveDocument;
     }
 }
 
