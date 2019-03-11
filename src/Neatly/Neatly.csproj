@@ -39,6 +39,9 @@
     <AssemblyOriginatorKeyFile>Neatly.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aga.Controls, Version=1.7.0.0, Culture=neutral, PublicKeyToken=fcc90fbf924463a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\TreeViewAdv.1.7.0.0\lib\net\Aga.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,16 +64,19 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="NavigationWindow.cs">
+    <Compile Include="Windows\DocumentNavigatorWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NavigationWindow.Designer.cs">
-      <DependentUpon>NavigationWindow.cs</DependentUpon>
+    <Compile Include="Windows\DocumentNavigatorWindow.Designer.cs">
+      <DependentUpon>DocumentNavigatorWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\DocumentNavigatorWindow.resx">
+      <DependentUpon>DocumentNavigatorWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

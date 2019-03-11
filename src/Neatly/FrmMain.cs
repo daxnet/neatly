@@ -1,5 +1,6 @@
 ﻿using Neatly.Controls;
 using Neatly.Properties;
+using Neatly.Windows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,8 +31,8 @@ namespace Neatly
 
         private void InitializeDockingSurface()
         {
-            var navigationWindow = new NavigationWindow();
-            navigationWindow.Show(dockPanel1, DockState.DockLeft);
+            var navigationWindow = new DocumentNavigatorWindow();
+            navigationWindow.Show(dockPanel, DockState.DockLeft);
         }
 
         private void InitializeActionComponent()

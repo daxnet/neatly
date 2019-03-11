@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace Neatly
+namespace Neatly.Windows
 {
-    public partial class NavigationWindow : DockContent
+    public partial class DocumentNavigatorWindow : DockContent
     {
-        public NavigationWindow()
+        public DocumentNavigatorWindow()
         {
             InitializeComponent();
         }

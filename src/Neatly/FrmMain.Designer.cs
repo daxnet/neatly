@@ -40,7 +40,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.mnuNewDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOpenDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -119,10 +119,10 @@
             resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Name = "toolStrip1";
             // 
-            // dockPanel1
+            // dockPanel
             // 
-            resources.ApplyResources(this.dockPanel1, "dockPanel1");
-            this.dockPanel1.Name = "dockPanel1";
+            resources.ApplyResources(this.dockPanel, "dockPanel");
+            this.dockPanel.Name = "dockPanel";
             // 
             // mnuNewDocument
             // 
@@ -172,7 +172,7 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dockPanel1);
+            this.Controls.Add(this.dockPanel);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip1);
@@ -198,7 +198,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnuFile;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel;
         private System.Windows.Forms.ToolStripMenuItem mnuNewDocument;
         private System.Windows.Forms.ToolStripMenuItem mnuOpenDocument;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
