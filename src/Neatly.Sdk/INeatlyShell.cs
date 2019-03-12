@@ -9,6 +9,8 @@ namespace Neatly.Sdk
 {
     public interface INeatlyShell
     {
-        Panel MasterPanel { get; }
+        string Text { get; set; }
+
+
     }
 }
