@@ -25,7 +25,7 @@ namespace Neatly.DocumentModel
 
         protected override string WorkspaceFileExtension => "ndoc";
 
-        protected override Document Create(WorkspaceModelEnricher<Document> enricher)
+        protected override (bool, Document) Create(WorkspaceModelEnricher<Document> enricher)
         {
             var document = new Document
             {
@@ -34,10 +34,10 @@ namespace Neatly.DocumentModel
 
             if (enricher != null)
             {
-                document = enricher(document);
+                return enricher(document);
             }
 
-            return document;
+            return (true, document);
         }
                               
         protected override Document OpenFromFile(string fileName)

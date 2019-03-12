@@ -119,7 +119,18 @@ namespace Neatly
 
         private void Action_NewDocument(object sender, EventArgs e)
         {
+            this.workspace.New(doc =>
+            {
+                using (var createNewDocumentDialog = new FrmCreateNewDocument(doc))
+                {
+                    if (createNewDocumentDialog.ShowDialog(this) == DialogResult.OK)
+                    {
+                        return (true, createNewDocumentDialog.Document);
+                    }
 
+                    return (false, doc);
+                }
+            });
         }
 
         private void Action_OpenDocument(object sender, EventArgs e)

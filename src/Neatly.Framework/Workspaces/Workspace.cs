@@ -193,7 +193,11 @@ namespace Neatly.Framework.Workspaces
         public bool New(WorkspaceModelEnricher<TModel> enricher = null)
         {
             // Creates the instance of the workspace model.
-            var creatingModel = Create(enricher);
+            var (succeeded, creatingModel) = Create(enricher);
+            if (!succeeded)
+            {
+                return false;
+            }
 
             // If the workspace model instance has been created successfully and there is no active workspace,
             // or the active workspace has been closed successfully, assign the newly created workspace instance
@@ -327,7 +331,7 @@ namespace Neatly.Framework.Workspaces
         /// Creates the workspace.
         /// </summary>
         /// <returns>The workspace model that was created.</returns>
-        protected abstract TModel Create(WorkspaceModelEnricher<TModel> enricher = null);
+        protected abstract (bool, TModel) Create(WorkspaceModelEnricher<TModel> enricher = null);
 
         /// <summary>
         /// Raises the <see cref="E:WorkspaceChanged" /> event.

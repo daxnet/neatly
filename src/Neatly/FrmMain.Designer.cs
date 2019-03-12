@@ -39,15 +39,15 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.mnuNewDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOpenDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuSaveDocument = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tbtnNewDocument = new System.Windows.Forms.ToolStripButton();
             this.tbtnOpenDocument = new System.Windows.Forms.ToolStripButton();
             this.tbtnSaveDocument = new System.Windows.Forms.ToolStripButton();
+            this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -110,20 +110,6 @@
             this.mnuFile.Name = "mnuFile";
             resources.ApplyResources(this.mnuFile, "mnuFile");
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tbtnNewDocument,
-            this.tbtnOpenDocument,
-            this.tbtnSaveDocument});
-            resources.ApplyResources(this.toolStrip1, "toolStrip1");
-            this.toolStrip1.Name = "toolStrip1";
-            // 
-            // dockPanel
-            // 
-            resources.ApplyResources(this.dockPanel, "dockPanel");
-            this.dockPanel.Name = "dockPanel";
-            // 
             // mnuNewDocument
             // 
             this.mnuNewDocument.Image = global::Neatly.Properties.Resources.page_white;
@@ -147,6 +133,15 @@
             this.mnuSaveDocument.Name = "mnuSaveDocument";
             resources.ApplyResources(this.mnuSaveDocument, "mnuSaveDocument");
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tbtnNewDocument,
+            this.tbtnOpenDocument,
+            this.tbtnSaveDocument});
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
+            this.toolStrip1.Name = "toolStrip1";
+            // 
             // tbtnNewDocument
             // 
             this.tbtnNewDocument.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -167,6 +162,12 @@
             this.tbtnSaveDocument.Image = global::Neatly.Properties.Resources.disk;
             resources.ApplyResources(this.tbtnSaveDocument, "tbtnSaveDocument");
             this.tbtnSaveDocument.Name = "tbtnSaveDocument";
+            // 
+            // dockPanel
+            // 
+            resources.ApplyResources(this.dockPanel, "dockPanel");
+            this.dockPanel.DockBackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.dockPanel.Name = "dockPanel";
             // 
             // FrmMain
             // 

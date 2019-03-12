@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Neatly.Framework.Workspaces
 {
-    public delegate TModel WorkspaceModelEnricher<TModel>(in TModel input) where TModel : IWorkspaceModel;
+    public delegate (bool, TModel) WorkspaceModelEnricher<TModel>(TModel input) where TModel : IWorkspaceModel;
 }
