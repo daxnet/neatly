@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Neatly.Framework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Neatly.Controls
 {
     public sealed class ActionComponent : Component
     {
+        private readonly Control parentControl;
         private readonly List<ToolStripItem> managedToolStrips = new List<ToolStripItem>();
         private readonly EventHandler clickHandler;
         private bool enabled;
@@ -18,28 +20,49 @@ namespace Neatly.Controls
         private string tooltipText;
         private bool disposed;
 
-        public ActionComponent(ToolStripMenuItem menuItem, ToolStripButton button, EventHandler clickHandler)
-            : this(new ToolStripItem[] { menuItem, button }, clickHandler)
-        { }
-
-        public ActionComponent(ToolStripMenuItem menuItem, ToolStripButton button, string tooltipText, EventHandler clickHandler)
-            : this(menuItem, button, clickHandler)
+        public ActionComponent(Control parentControl, ToolStripMenuItem menuItem, string tooltipText, EventHandler clickHandler)
+            : this(parentControl, new ToolStripItem[] { menuItem }, clickHandler)
         {
             this.TooltipText = tooltipText;
         }
 
-        public ActionComponent(ToolStripMenuItem menuItem, ToolStripButton button, string text, string tooltipText, EventHandler clickHandler)
-            : this(menuItem, button, clickHandler)
+        public ActionComponent(Control parentControl, ToolStripButton button, string tooltipText, EventHandler clickHandler)
+            : this(parentControl, new ToolStripItem[] { button }, clickHandler)
+        {
+            this.TooltipText = tooltipText;
+        }
+
+        public ActionComponent(Control parentControl, ToolStripMenuItem menuItem, ToolStripButton button, EventHandler clickHandler)
+            : this(parentControl, new ToolStripItem[] { menuItem, button }, clickHandler)
+        { }
+
+        public ActionComponent(Control parentControl, ToolStripMenuItem menuItem, ToolStripButton button, string tooltipText, EventHandler clickHandler)
+            : this(parentControl, menuItem, button, clickHandler)
+        {
+            this.TooltipText = tooltipText;
+        }
+
+        public ActionComponent(Control parentControl, ToolStripMenuItem menuItem, ToolStripButton button, string text, string tooltipText, EventHandler clickHandler)
+            : this(parentControl, menuItem, button, clickHandler)
         {
             this.Text = text;
             this.TooltipText = tooltipText;
         }
 
-        public ActionComponent(IEnumerable<ToolStripItem> managedToolStrips, EventHandler clickHandler)
+        public ActionComponent(Control parentControl, IEnumerable<ToolStripItem> managedToolStrips, EventHandler clickHandler)
         {
+            this.parentControl = parentControl;
             this.managedToolStrips.AddRange(managedToolStrips);
             this.clickHandler = clickHandler;
-            this.managedToolStrips.ForEach(ts => ts.Click += this.clickHandler);
+            this.managedToolStrips.ForEach(ts => ts.Click += ExecuteClickHandler);
+        }
+
+        private void ExecuteClickHandler(object sender, EventArgs e)
+        {
+            using (new LengthyOperation(this.parentControl))
+            {
+                this.clickHandler(sender, e);
+            }
         }
 
         public bool Enabled
@@ -88,7 +111,7 @@ namespace Neatly.Controls
             {
                 if (disposing)
                 {
-                    this.managedToolStrips.ForEach(ts => ts.Click -= this.clickHandler);
+                    this.managedToolStrips.ForEach(ts => ts.Click -= ExecuteClickHandler);
                 }
 
                 disposed = true;

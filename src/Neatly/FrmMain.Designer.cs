@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -36,20 +35,21 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuNewDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOpenDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuSaveDocument = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuCloseDocument = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainToolStrip = new System.Windows.Forms.ToolStrip();
             this.tbtnNewDocument = new System.Windows.Forms.ToolStripButton();
             this.tbtnOpenDocument = new System.Windows.Forms.ToolStripButton();
             this.tbtnSaveDocument = new System.Windows.Forms.ToolStripButton();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.menuStrip1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.mainMenu.SuspendLayout();
+            this.mainToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -89,16 +89,12 @@
             // 
             resources.ApplyResources(this.ContentPanel, "ContentPanel");
             // 
-            // notifyIcon1
+            // mainMenu
             // 
-            resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFile});
-            resources.ApplyResources(this.menuStrip1, "menuStrip1");
-            this.menuStrip1.Name = "menuStrip1";
+            resources.ApplyResources(this.mainMenu, "mainMenu");
+            this.mainMenu.Name = "mainMenu";
             // 
             // mnuFile
             // 
@@ -106,7 +102,9 @@
             this.mnuNewDocument,
             this.mnuOpenDocument,
             this.toolStripMenuItem1,
-            this.mnuSaveDocument});
+            this.mnuSaveDocument,
+            this.toolStripMenuItem2,
+            this.mnuCloseDocument});
             this.mnuFile.Name = "mnuFile";
             resources.ApplyResources(this.mnuFile, "mnuFile");
             // 
@@ -133,14 +131,25 @@
             this.mnuSaveDocument.Name = "mnuSaveDocument";
             resources.ApplyResources(this.mnuSaveDocument, "mnuSaveDocument");
             // 
-            // toolStrip1
+            // toolStripMenuItem2
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
+            // 
+            // mnuCloseDocument
+            // 
+            this.mnuCloseDocument.Image = global::Neatly.Properties.Resources.cross;
+            this.mnuCloseDocument.Name = "mnuCloseDocument";
+            resources.ApplyResources(this.mnuCloseDocument, "mnuCloseDocument");
+            // 
+            // mainToolStrip
+            // 
+            this.mainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tbtnNewDocument,
             this.tbtnOpenDocument,
             this.tbtnSaveDocument});
-            resources.ApplyResources(this.toolStrip1, "toolStrip1");
-            this.toolStrip1.Name = "toolStrip1";
+            resources.ApplyResources(this.mainToolStrip, "mainToolStrip");
+            this.mainToolStrip.Name = "mainToolStrip";
             // 
             // tbtnNewDocument
             // 
@@ -174,15 +183,15 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dockPanel);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.mainToolStrip);
             this.Controls.Add(this.statusStrip);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.mainMenu);
             this.IsMdiContainer = true;
             this.Name = "FrmMain";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.mainMenu.ResumeLayout(false);
+            this.mainMenu.PerformLayout();
+            this.mainToolStrip.ResumeLayout(false);
+            this.mainToolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,10 +204,9 @@
         private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
         private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
         private System.Windows.Forms.ToolStripContentPanel ContentPanel;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem mnuFile;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip mainToolStrip;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel;
         private System.Windows.Forms.ToolStripMenuItem mnuNewDocument;
         private System.Windows.Forms.ToolStripMenuItem mnuOpenDocument;
@@ -207,6 +215,8 @@
         private System.Windows.Forms.ToolStripButton tbtnNewDocument;
         private System.Windows.Forms.ToolStripButton tbtnOpenDocument;
         private System.Windows.Forms.ToolStripButton tbtnSaveDocument;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem mnuCloseDocument;
     }
 }
 

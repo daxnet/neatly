@@ -1,6 +1,6 @@
 ﻿namespace Neatly.Windows
 {
-    partial class StartWindow
+    partial class Navigator
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.tvOutline = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
-            // StartWindow
+            // tvOutline
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.tvOutline.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvOutline.Location = new System.Drawing.Point(0, 0);
+            this.tvOutline.Name = "tvOutline";
+            this.tvOutline.Size = new System.Drawing.Size(618, 509);
+            this.tvOutline.TabIndex = 0;
+            // 
+            // Navigator
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "StartWindow";
-            this.Text = "Start";
+            this.ClientSize = new System.Drawing.Size(618, 509);
+            this.Controls.Add(this.tvOutline);
+            this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Name = "Navigator";
+            this.Text = "Document Navigator";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TreeView tvOutline;
     }
 }

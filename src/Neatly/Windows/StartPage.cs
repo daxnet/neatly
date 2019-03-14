@@ -7,13 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
 
 namespace Neatly.Windows
 {
-    public partial class DocumentNavigatorWindow : DockContent
+    public partial class StartPage : Form
     {
-        public DocumentNavigatorWindow()
+        public StartPage()
         {
             InitializeComponent();
         }

@@ -126,13 +126,13 @@
     <value>Tahoma, 11.25pt</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>421, 324</value>
+    <value>438, 334</value>
   </data>
   <data name="btnCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 42</value>
+    <value>100, 32</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
@@ -160,13 +160,13 @@
     <value>Tahoma, 11.25pt, style=Bold</value>
   </data>
   <data name="btnCreate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 324</value>
+    <value>332, 334</value>
   </data>
   <data name="btnCreate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
   </data>
   <data name="btnCreate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 42</value>
+    <value>100, 32</value>
   </data>
   <data name="btnCreate.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -364,13 +364,13 @@
     <value>26, 26</value>
   </data>
   <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>365, 42</value>
+    <value>386, 42</value>
   </data>
   <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="lblTitle.Text" xml:space="preserve">
-    <value>Create New Document</value>
+    <value>Create a new document</value>
   </data>
   <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
     <value>lblTitle</value>

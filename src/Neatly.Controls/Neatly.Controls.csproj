@@ -56,5 +56,11 @@
   <ItemGroup>
     <None Include="Neatly.snk" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Neatly.Framework\Neatly.Framework.csproj">
+      <Project>{46c6cc29-174d-449a-b20b-caa79d743602}</Project>
+      <Name>Neatly.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

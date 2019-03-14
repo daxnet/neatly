@@ -73,19 +73,19 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Windows\DocumentNavigatorWindow.cs">
+    <Compile Include="Windows\Navigator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\DocumentNavigatorWindow.Designer.cs">
-      <DependentUpon>DocumentNavigatorWindow.cs</DependentUpon>
+    <Compile Include="Windows\Navigator.Designer.cs">
+      <DependentUpon>Navigator.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Windows\StartWindow.cs">
+    <Compile Include="Windows\StartPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Windows\StartWindow.Designer.cs">
-      <DependentUpon>StartWindow.cs</DependentUpon>
+    <Compile Include="Windows\StartPage.Designer.cs">
+      <DependentUpon>StartPage.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FrmCreateNewDocument.resx">
       <DependentUpon>FrmCreateNewDocument.cs</DependentUpon>
@@ -93,8 +93,8 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Windows\DocumentNavigatorWindow.resx">
-      <DependentUpon>DocumentNavigatorWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Windows\Navigator.resx">
+      <DependentUpon>Navigator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -106,8 +106,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Windows\StartWindow.resx">
-      <DependentUpon>StartWindow.cs</DependentUpon>
+    <EmbeddedResource Include="Windows\StartPage.resx">
+      <DependentUpon>StartPage.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Neatly.snk" />
     <None Include="packages.config" />
@@ -142,7 +142,9 @@
       <Name>Neatly.Sdk</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\cross.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\disk.png" />
   </ItemGroup>
