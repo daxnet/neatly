@@ -24,12 +24,13 @@ namespace Neatly
 
         private const float ResizeFactor = 0.8F;
 
-        private ActionComponent closeDocumentAction;
-        private ActionComponent newDocumentAction;
-        private ActionComponent openDocumentAction;
-        private ActionComponent saveDocumentAction;
+        private readonly ActionComponent closeDocumentAction;
+        private readonly Navigator navigatorWindow;
+        private readonly ActionComponent newDocumentAction;
+        private readonly ActionComponent openDocumentAction;
+        private readonly ActionComponent saveDocumentAction;
+        private readonly WindowManager windowManager;
         private ShellState state;
-        private NeatlyWorkspace workspace;
 
         #endregion Private Fields
 
@@ -38,9 +39,25 @@ namespace Neatly
         public FrmMain()
         {
             InitializeComponent();
-            InitializeWorkspace();
-            InitializeActionComponent();
-            InitializeDockingSurface();
+
+            // Initialize Action Components.
+            newDocumentAction = new ActionComponent(this, mnuNewDocument, tbtnNewDocument, Resources.Tooltip_NewDocument, Action_NewDocument);
+            openDocumentAction = new ActionComponent(this, mnuOpenDocument, tbtnOpenDocument, Resources.Tooltip_OpenDocument, Action_OpenDocument);
+            saveDocumentAction = new ActionComponent(this, mnuSaveDocument, tbtnSaveDocument, Resources.Tooltip_SaveDocument, Action_SaveDocument);
+            closeDocumentAction = new ActionComponent(this, mnuCloseDocument, Resources.Tooltip_CloseDocument, Action_CloseDocument);
+
+            // Initialize Workspace.
+            Workspace = new NeatlyWorkspace();
+            Workspace.WorkspaceCreated += Workspace_WorkspaceCreated;
+            Workspace.WorkspaceOpened += Workspace_WorkspaceOpened;
+            Workspace.WorkspaceSaved += Workspace_WorkspaceSaved;
+            Workspace.WorkspaceChanged += Workspace_WorkspaceChanged;
+            Workspace.WorkspaceClosed += Workspace_WorkspaceClosed;
+
+            // Initialize Windows.
+            windowManager = new WindowManager(this);
+            navigatorWindow = windowManager.CreateWindow<Navigator>();
+            navigatorWindow.Show(dockPanel, DockState.DockLeft);
         }
 
         #endregion Public Constructors
@@ -80,7 +97,7 @@ namespace Neatly
             }
         }
 
-        public NeatlyWorkspace Workspace => workspace;
+        public NeatlyWorkspace Workspace { get; private set; }
 
         #endregion Public Properties
 
@@ -90,20 +107,22 @@ namespace Neatly
         {
             base.OnFormClosed(e);
 
-            workspace.WorkspaceChanged -= Workspace_WorkspaceChanged;
-            workspace.WorkspaceClosed -= Workspace_WorkspaceClosed;
-            workspace.WorkspaceCreated -= Workspace_WorkspaceCreated;
-            workspace.WorkspaceOpened -= Workspace_WorkspaceOpened;
-            workspace.WorkspaceSaved -= Workspace_WorkspaceSaved;
+            Workspace.WorkspaceChanged -= Workspace_WorkspaceChanged;
+            Workspace.WorkspaceClosed -= Workspace_WorkspaceClosed;
+            Workspace.WorkspaceCreated -= Workspace_WorkspaceCreated;
+            Workspace.WorkspaceOpened -= Workspace_WorkspaceOpened;
+            Workspace.WorkspaceSaved -= Workspace_WorkspaceSaved;
 
             newDocumentAction.Dispose();
             openDocumentAction.Dispose();
             saveDocumentAction.Dispose();
+
+            windowManager.Dispose();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            e.Cancel = !this.workspace.Close();
+            e.Cancel = !this.Workspace.Close();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -125,12 +144,12 @@ namespace Neatly
 
         private void Action_CloseDocument(object sender, EventArgs e)
         {
-            this.workspace.Close();
+            this.Workspace.Close();
         }
 
         private void Action_NewDocument(object sender, EventArgs e)
         {
-            this.workspace.New(doc =>
+            this.Workspace.New(doc =>
             {
                 using (var createNewDocumentDialog = new FrmCreateNewDocument(doc))
                 {
@@ -146,36 +165,12 @@ namespace Neatly
 
         private void Action_OpenDocument(object sender, EventArgs e)
         {
-            this.workspace.Open();
+            this.Workspace.Open();
         }
 
         private void Action_SaveDocument(object sender, EventArgs e)
         {
-            this.workspace.Save();
-        }
-
-        private void InitializeActionComponent()
-        {
-            newDocumentAction = new ActionComponent(this, mnuNewDocument, tbtnNewDocument, Resources.Tooltip_NewDocument, Action_NewDocument);
-            openDocumentAction = new ActionComponent(this, mnuOpenDocument, tbtnOpenDocument, Resources.Tooltip_OpenDocument, Action_OpenDocument);
-            saveDocumentAction = new ActionComponent(this, mnuSaveDocument, tbtnSaveDocument, Resources.Tooltip_SaveDocument, Action_SaveDocument);
-            closeDocumentAction = new ActionComponent(this, mnuCloseDocument, Resources.Tooltip_CloseDocument, Action_CloseDocument);
-        }
-
-        private void InitializeDockingSurface()
-        {
-            var navigator = new Navigator(this);
-            navigator.Show(dockPanel, DockState.DockLeft);
-        }
-
-        private void InitializeWorkspace()
-        {
-            workspace = new NeatlyWorkspace();
-            workspace.WorkspaceCreated += Workspace_WorkspaceCreated;
-            workspace.WorkspaceOpened += Workspace_WorkspaceOpened;
-            workspace.WorkspaceSaved += Workspace_WorkspaceSaved;
-            workspace.WorkspaceChanged += Workspace_WorkspaceChanged;
-            workspace.WorkspaceClosed += Workspace_WorkspaceClosed;
+            this.Workspace.Save();
         }
 
         private void Workspace_WorkspaceChanged(object sender, EventArgs e)

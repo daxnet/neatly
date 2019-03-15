@@ -14,18 +14,15 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Neatly.Windows
 {
-    public partial class Navigator : DockContent
+    public partial class Navigator : BaseWindow
     {
-        private readonly INeatlyShell shell;
-
         public Navigator(INeatlyShell shell)
+            : base(shell)
         {
-            this.shell = shell;
-
             InitializeComponent();
             
-            this.shell.Workspace.WorkspaceCreated += Workspace_WorkspaceCreated;
-            this.shell.Workspace.WorkspaceClosed += Workspace_WorkspaceClosed;
+            Shell.Workspace.WorkspaceCreated += Workspace_WorkspaceCreated;
+            Shell.Workspace.WorkspaceClosed += Workspace_WorkspaceClosed;
         }
 
         private void Workspace_WorkspaceClosed(object sender, EventArgs e)
@@ -39,11 +36,16 @@ namespace Neatly.Windows
             tvOutline.Nodes.Add(e.Model.Title);
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+        }
+
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             base.OnFormClosed(e);
-            this.shell.Workspace.WorkspaceCreated -= Workspace_WorkspaceCreated;
-            this.shell.Workspace.WorkspaceClosed -= Workspace_WorkspaceClosed;
+            Shell.Workspace.WorkspaceCreated -= Workspace_WorkspaceCreated;
+            Shell.Workspace.WorkspaceClosed -= Workspace_WorkspaceClosed;
         }
     }
 }

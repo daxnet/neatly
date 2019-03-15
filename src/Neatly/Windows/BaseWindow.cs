@@ -8,15 +8,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace Neatly.Windows
 {
-    public partial class StartPage : BaseWindow
+    public partial class BaseWindow : DockContent
     {
-        public StartPage(INeatlyShell shell)
-            : base(shell)
+        private BaseWindow()
         {
             InitializeComponent();
+            this.HideOnClose = true;
         }
+
+        protected BaseWindow(INeatlyShell shell)
+            : this()
+        {
+            this.Shell = shell;
+        }
+
+        protected INeatlyShell Shell { get; }
     }
 }
