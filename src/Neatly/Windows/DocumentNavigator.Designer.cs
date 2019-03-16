@@ -1,6 +1,6 @@
 ﻿namespace Neatly.Windows
 {
-    partial class Navigator
+    partial class DocumentNavigator
     {
         /// <summary>
         /// Required designer variable.
@@ -28,25 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tvOutline = new System.Windows.Forms.TreeView();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocumentNavigator));
+            this.navigationTree = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
-            // tvOutline
+            // navigationTree
             // 
-            this.tvOutline.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvOutline.Location = new System.Drawing.Point(0, 0);
-            this.tvOutline.Name = "tvOutline";
-            this.tvOutline.Size = new System.Drawing.Size(618, 509);
-            this.tvOutline.TabIndex = 0;
+            this.navigationTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.navigationTree.HideSelection = false;
+            this.navigationTree.Location = new System.Drawing.Point(0, 0);
+            this.navigationTree.Name = "navigationTree";
+            this.navigationTree.Size = new System.Drawing.Size(618, 509);
+            this.navigationTree.TabIndex = 0;
             // 
-            // Navigator
+            // DocumentNavigator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 509);
-            this.Controls.Add(this.tvOutline);
+            this.Controls.Add(this.navigationTree);
             this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "Navigator";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "DocumentNavigator";
             this.Text = "Document Navigator";
             this.ResumeLayout(false);
 
@@ -54,6 +57,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TreeView tvOutline;
+        private System.Windows.Forms.TreeView navigationTree;
     }
 }

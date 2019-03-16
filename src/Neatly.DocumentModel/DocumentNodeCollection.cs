@@ -11,8 +11,9 @@ namespace Neatly.DocumentModel
 {
     public abstract class DocumentNodeCollection : PropertyChangedNotifier, INode
     {
-        private DateTime dateCreated;
-        private DateTime? dateLastModified;
+        protected string title;
+        protected DateTime dateCreated;
+        protected DateTime? dateLastModified;
 
         #region Protected Fields
 
@@ -32,11 +33,26 @@ namespace Neatly.DocumentModel
 
         #region Public Properties
 
-        public IEnumerable<DocumentNode> ChildNodes => children;
+        public IEnumerable<INode> ChildNodes => children;
 
         public int Count => children.Count;
 
         public abstract INode Parent { get; }
+
+        public abstract NodeType Type { get; }
+
+        public string Title
+        {
+            get => title;
+            set
+            {
+                if (title != value)
+                {
+                    title = value;
+                    OnPropertyChanged(nameof(Title));
+                }
+            }
+        }
 
         public DateTime DateCreated
         {

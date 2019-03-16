@@ -27,5 +27,10 @@ namespace Neatly.Windows
         }
 
         protected INeatlyShell Shell { get; }
+
+        public override string ToString()
+        {
+            return this.Text;
+        }
     }
 }

@@ -1,0 +1,22 @@
+﻿using Neatly.Sdk;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Neatly.Windows
+{
+    public partial class Editor : BaseWindow
+    {
+        public Editor(INeatlyShell shell)
+            : base(shell)
+        {
+            InitializeComponent();
+        }
+    }
+}

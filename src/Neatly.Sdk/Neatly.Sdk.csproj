@@ -48,8 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDocumentNavigator.cs" />
     <Compile Include="INeatlyShell.cs" />
-    <Compile Include="IPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShellState.cs" />
   </ItemGroup>

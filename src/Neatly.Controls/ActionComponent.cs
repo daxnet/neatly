@@ -16,8 +16,10 @@ namespace Neatly.Controls
         private readonly EventHandler clickHandler;
         private bool enabled;
         private bool visible;
+        private bool @checked;
         private string text;
         private string tooltipText;
+        private object tag;
         private bool disposed;
 
         public ActionComponent(Control parentControl, ToolStripMenuItem menuItem, string tooltipText, EventHandler clickHandler)
@@ -82,6 +84,40 @@ namespace Neatly.Controls
             {
                 this.managedToolStrips.ForEach(ts => ts.Visible = value);
                 visible = value;
+            }
+        }
+
+        public object Tag
+        {
+            get => tag;
+            set
+            {
+                this.managedToolStrips.ForEach(ts => ts.Tag = value);
+                tag = value;
+            }
+        }
+
+        public bool Checked
+        {
+            get => @checked;
+            set
+            {
+                // The Checked property is not defined in the base class.
+                this.managedToolStrips.ForEach(ts =>
+                {
+                    switch (ts)
+                    {
+                        case ToolStripMenuItem menuItem:
+                            menuItem.Checked = value;
+                            break;
+                        case ToolStripButton button:
+                            button.Checked = value;
+                            break;
+                        default: break;
+                    }
+                });
+
+                @checked = value;
             }
         }
 

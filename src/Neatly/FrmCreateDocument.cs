@@ -11,15 +11,15 @@ using System.Windows.Forms;
 
 namespace Neatly
 {
-    public partial class FrmCreateNewDocument : Form
+    public partial class FrmCreateDocument : Form
     {
-        public FrmCreateNewDocument(Document document)
+        public FrmCreateDocument(Document document)
             : this()
         {
             this.Document = document;
         }
 
-        private FrmCreateNewDocument()
+        private FrmCreateDocument()
         {
             InitializeComponent();
         }
@@ -39,6 +39,14 @@ namespace Neatly
             Document.Title = txtTitle.Text;
             Document.Description = txtDescription.Text;
             Document.Author = txtAuthor.Text;
+
+            //var chap1 = new DocumentNode(Document, "abc");
+            //var chap11 = new DocumentNode(chap1, "def");
+            //var chap111 = new DocumentNode(chap11, "ghi");
+
+            //var chap2 = new DocumentNode(Document, "111");
+            //var chap22 = new DocumentNode(chap2, "222");
+            //var chap222 = new DocumentNode(chap22, "333");
         }
     }
 }

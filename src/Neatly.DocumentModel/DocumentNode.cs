@@ -12,7 +12,6 @@ namespace Neatly.DocumentModel
 {
     public sealed class DocumentNode : DocumentNodeCollection
     {
-        private string title;
         private string content;
         private INode parent;
         
@@ -36,19 +35,6 @@ namespace Neatly.DocumentModel
             this.content = content;
         }
 
-        public string Title
-        {
-            get => title;
-            set
-            {
-                if (!string.Equals(title, value))
-                {
-                    title = value;
-                    OnPropertyChanged(nameof(Title));
-                }
-            }
-        }
-
         public string Content
         {
             get => content;
@@ -65,5 +51,7 @@ namespace Neatly.DocumentModel
         public override string ToString() => title;
 
         public override INode Parent => parent;
+
+        public override NodeType Type => NodeType.DocumentNode;
     }
 }

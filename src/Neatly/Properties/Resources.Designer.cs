@@ -63,6 +63,16 @@ namespace Neatly.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap application_side_tree {
+            get {
+                object obj = ResourceManager.GetObject("application_side_tree", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cross {
             get {
                 object obj = ResourceManager.GetObject("cross", resourceCulture);
@@ -106,6 +116,15 @@ namespace Neatly.Properties {
         internal static string Tooltip_CloseDocument {
             get {
                 return ResourceManager.GetString("Tooltip.CloseDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shows or hides the document navigator..
+        /// </summary>
+        internal static string Tooltip_DocumentNavigator {
+            get {
+                return ResourceManager.GetString("Tooltip.DocumentNavigator", resourceCulture);
             }
         }
         

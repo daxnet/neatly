@@ -63,6 +63,7 @@
     <Compile Include="DocumentNodeCollection.cs" />
     <Compile Include="INode.cs" />
     <Compile Include="NeatlyWorkspace.cs" />
+    <Compile Include="NodeType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

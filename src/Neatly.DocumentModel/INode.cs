@@ -10,14 +10,18 @@ namespace Neatly.DocumentModel
     /// Represents the document nodes that have navigation properties
     /// </summary>
     public interface INode
-    { 
+    {
+        string Title { get; }
+
+        NodeType Type { get; }
+
         DateTime DateCreated { get; set; }
 
         DateTime? DateLastModified { get; set; }
 
         INode Parent { get; }
 
-        IEnumerable<DocumentNode> ChildNodes { get; }
+        IEnumerable<INode> ChildNodes { get; }
 
         void Add(DocumentNode documentNode);
     }

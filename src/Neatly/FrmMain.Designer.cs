@@ -43,6 +43,9 @@
             this.mnuSaveDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuCloseDocument = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuView = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDocumentNavigator = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mainToolStrip = new System.Windows.Forms.ToolStrip();
             this.tbtnNewDocument = new System.Windows.Forms.ToolStripButton();
             this.tbtnOpenDocument = new System.Windows.Forms.ToolStripButton();
@@ -92,7 +95,9 @@
             // mainMenu
             // 
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFile});
+            this.mnuFile,
+            this.mnuView,
+            this.mnuHelp});
             resources.ApplyResources(this.mainMenu, "mainMenu");
             this.mainMenu.Name = "mainMenu";
             // 
@@ -141,6 +146,24 @@
             this.mnuCloseDocument.Image = global::Neatly.Properties.Resources.cross;
             this.mnuCloseDocument.Name = "mnuCloseDocument";
             resources.ApplyResources(this.mnuCloseDocument, "mnuCloseDocument");
+            // 
+            // mnuView
+            // 
+            this.mnuView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuDocumentNavigator});
+            this.mnuView.Name = "mnuView";
+            resources.ApplyResources(this.mnuView, "mnuView");
+            // 
+            // mnuDocumentNavigator
+            // 
+            this.mnuDocumentNavigator.Image = global::Neatly.Properties.Resources.application_side_tree;
+            this.mnuDocumentNavigator.Name = "mnuDocumentNavigator";
+            resources.ApplyResources(this.mnuDocumentNavigator, "mnuDocumentNavigator");
+            // 
+            // mnuHelp
+            // 
+            this.mnuHelp.Name = "mnuHelp";
+            resources.ApplyResources(this.mnuHelp, "mnuHelp");
             // 
             // mainToolStrip
             // 
@@ -217,6 +240,9 @@
         private System.Windows.Forms.ToolStripButton tbtnSaveDocument;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem mnuCloseDocument;
+        private System.Windows.Forms.ToolStripMenuItem mnuView;
+        private System.Windows.Forms.ToolStripMenuItem mnuDocumentNavigator;
+        private System.Windows.Forms.ToolStripMenuItem mnuHelp;
     }
 }
 

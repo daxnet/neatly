@@ -17,7 +17,6 @@ namespace Neatly.DocumentModel
         #region Private Fields
         private string author;
         private string description;
-        private string title;
 
         #endregion Private Fields
 
@@ -67,18 +66,8 @@ namespace Neatly.DocumentModel
 
         public override INode Parent => null;
 
-        public string Title
-        {
-            get => title;
-            set
-            {
-                if (!string.Equals(title, value))
-                {
-                    title = value;
-                    this.OnPropertyChanged(nameof(Title));
-                }
-            }
-        }
+        public override NodeType Type => NodeType.Document;
+
         public WorkspaceModelVersion Version { get; set; }
 
         public override string ToString() => title;

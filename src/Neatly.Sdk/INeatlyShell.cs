@@ -8,6 +8,10 @@ using System.Windows.Forms;
 
 namespace Neatly.Sdk
 {
+    /// <summary>
+    /// Represents the abstraction of the Neatly main application. Shells can be
+    /// referenced by any components that extends Neatly application.
+    /// </summary>
     public interface INeatlyShell : IWin32Window
     {
 
@@ -16,5 +20,7 @@ namespace Neatly.Sdk
         ShellState State { get; }
 
         NeatlyWorkspace Workspace { get; }
+
+        IDocumentNavigator DocumentNavigator { get; }
     }
 }
