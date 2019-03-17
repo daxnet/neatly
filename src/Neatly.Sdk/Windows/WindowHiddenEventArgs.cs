@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Neatly.Windows
+namespace Neatly.Sdk.Windows
 {
-    internal sealed class WindowHiddenEventArgs : WindowEventArgs
+    public sealed class WindowHiddenEventArgs : WindowEventArgs
     {
         public WindowHiddenEventArgs(BaseWindow window) : base(window)
         {

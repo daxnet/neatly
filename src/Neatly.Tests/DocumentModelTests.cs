@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Neatly.DocumentModel;
@@ -43,6 +44,18 @@ namespace Neatly.Tests
             var doc2 = JsonConvert.DeserializeObject<Document>(json);
             Assert.IsNotNull(doc2);
             Assert.AreEqual("title", doc.Title);
+        }
+
+        [TestMethod]
+        public void SerializeIdTest()
+        {
+            var doc = CreateMockDocument();
+            var g1 = doc.Id;
+            var g2 = doc.ChildNodes.First().Id;
+            var json = JsonConvert.SerializeObject(doc, jsonSerializerSettings);
+            var doc2 = JsonConvert.DeserializeObject<Document>(json);
+            Assert.AreEqual(g1, doc2.Id);
+            Assert.AreEqual(g2, doc2.ChildNodes.First().Id);
         }
 
         [TestMethod]

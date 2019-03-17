@@ -40,13 +40,7 @@ namespace Neatly
             Document.Description = txtDescription.Text;
             Document.Author = txtAuthor.Text;
 
-            //var chap1 = new DocumentNode(Document, "abc");
-            //var chap11 = new DocumentNode(chap1, "def");
-            //var chap111 = new DocumentNode(chap11, "ghi");
-
-            //var chap2 = new DocumentNode(Document, "111");
-            //var chap22 = new DocumentNode(chap2, "222");
-            //var chap222 = new DocumentNode(chap22, "333");
+            new DocumentNode(Document, "Article 1");
         }
     }
 }

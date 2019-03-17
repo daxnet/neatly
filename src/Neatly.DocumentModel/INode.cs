@@ -11,6 +11,8 @@ namespace Neatly.DocumentModel
     /// </summary>
     public interface INode
     {
+        Guid Id { get; set; }
+
         string Title { get; }
 
         NodeType Type { get; }

@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace Neatly.Windows
+namespace Neatly.Sdk.Windows
 {
-    internal sealed class WindowManager : Component
+    public sealed class WindowManager : Component
     {
         private readonly INeatlyShell shell;
         private readonly List<BaseWindow> managedWindows = new List<BaseWindow>();
@@ -18,33 +18,26 @@ namespace Neatly.Windows
         public event EventHandler<WindowHiddenEventArgs> WindowHidden;
         public event EventHandler<WindowShownEventArgs> WindowShown;
 
-        internal WindowManager(INeatlyShell shell) => this.shell = shell;
+        public WindowManager(INeatlyShell shell) => this.shell = shell;
 
         public TWindow CreateWindow<TWindow>()
             where TWindow : BaseWindow
         {
             var window = (TWindow)Activator.CreateInstance(typeof(TWindow), this.shell);
-            window.DockStateChanged += Window_DockStateChanged;
+            window.DockWindowShown += Window_DockWindowShown;
+            window.DockWindowHidden += Window_DockWindowHidden;
             this.managedWindows.Add(window);
             return window;
         }
 
-        private void Window_DockStateChanged(object sender, EventArgs e)
+        private void Window_DockWindowHidden(object sender, EventArgs e)
         {
-            if (sender is BaseWindow window)
-            {
-                switch (window.DockState)
-                {
-                    case DockState.Hidden:
-                        this.WindowHidden?.Invoke(sender, new WindowHiddenEventArgs(window));
-                        break;
-                    case DockState.Unknown:
-                        break;
-                    default:
-                        this.WindowShown?.Invoke(sender, new WindowShownEventArgs(window));
-                        break;
-                }
-            }
+            WindowHidden?.Invoke(sender, new WindowHiddenEventArgs((BaseWindow)sender));
+        }
+
+        private void Window_DockWindowShown(object sender, EventArgs e)
+        {
+            WindowShown?.Invoke(sender, new WindowShownEventArgs((BaseWindow)sender));
         }
 
         public TWindow CreateOrReuseWindow<TWindow>()
@@ -71,7 +64,8 @@ namespace Neatly.Windows
             {
                 foreach (var window in managedWindows)
                 {
-                    window.DockStateChanged -= Window_DockStateChanged;
+                    window.DockWindowHidden -= Window_DockWindowHidden;
+                    window.DockWindowShown -= Window_DockWindowShown;
                     window.Dispose();
                 }
 

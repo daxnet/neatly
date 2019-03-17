@@ -51,6 +51,8 @@
             this.tbtnOpenDocument = new System.Windows.Forms.ToolStripButton();
             this.tbtnSaveDocument = new System.Windows.Forms.ToolStripButton();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuTools = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainToolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -96,7 +98,9 @@
             // 
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFile,
+            this.mnuEdit,
             this.mnuView,
+            this.mnuTools,
             this.mnuHelp});
             resources.ApplyResources(this.mainMenu, "mainMenu");
             this.mainMenu.Name = "mainMenu";
@@ -201,6 +205,16 @@
             this.dockPanel.DockBackColor = System.Drawing.SystemColors.AppWorkspace;
             this.dockPanel.Name = "dockPanel";
             // 
+            // mnuEdit
+            // 
+            this.mnuEdit.Name = "mnuEdit";
+            resources.ApplyResources(this.mnuEdit, "mnuEdit");
+            // 
+            // mnuTools
+            // 
+            this.mnuTools.Name = "mnuTools";
+            resources.ApplyResources(this.mnuTools, "mnuTools");
+            // 
             // FrmMain
             // 
             resources.ApplyResources(this, "$this");
@@ -243,6 +257,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnuView;
         private System.Windows.Forms.ToolStripMenuItem mnuDocumentNavigator;
         private System.Windows.Forms.ToolStripMenuItem mnuHelp;
+        private System.Windows.Forms.ToolStripMenuItem mnuEdit;
+        private System.Windows.Forms.ToolStripMenuItem mnuTools;
     }
 }
 

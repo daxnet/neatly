@@ -14,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using Neatly.Sdk.Windows;
 
 namespace Neatly
 {
@@ -25,8 +26,8 @@ namespace Neatly
         private const float ResizeFactor = 0.8F;
 
         private readonly ActionComponent closeDocumentAction;
-        private readonly ActionComponent documentNavigatorAction;
         private readonly DocumentNavigator documentNavigator;
+        private readonly ActionComponent documentNavigatorAction;
         private readonly ActionComponent newDocumentAction;
         private readonly ActionComponent openDocumentAction;
         private readonly ActionComponent saveDocumentAction;
@@ -62,13 +63,13 @@ namespace Neatly
             windowManager.WindowShown += WindowManager_WindowShown;
             documentNavigator = windowManager.CreateWindow<DocumentNavigator>();
             documentNavigator.Show(dockPanel, DockState.DockLeft);
-
-
         }
 
         #endregion Public Constructors
 
         #region Public Properties
+
+        public IDocumentNavigator DocumentNavigator => documentNavigator;
 
         public ShellState State
         {
@@ -105,9 +106,94 @@ namespace Neatly
 
         public NeatlyWorkspace Workspace { get; }
 
-        public IDocumentNavigator DocumentNavigator => documentNavigator;
-
         #endregion Public Properties
+
+        #region Public Methods
+
+        public void MergeTools(WindowTools windowTools)
+        {
+            if (windowTools?.IsEmpty ?? true)
+            {
+                return;
+            }
+
+            if (windowTools.MergingToolbar != null)
+            {
+                ToolStripManager.Merge(windowTools.MergingToolbar.ToolStrip, this.mainToolStrip);
+                windowTools.MergingToolbar.ToolStrip.Hide();
+            }
+
+            if (windowTools.MergingMenus != null &&
+                windowTools.MergingMenus.Count() > 0)
+            {
+                foreach(var mergingMenu in windowTools.MergingMenus)
+                {
+                    switch(mergingMenu.Position)
+                    {
+                        case MenuMergePosition.File:
+                            ToolStripManager.Merge(mergingMenu.ToolStrip, mnuFile.DropDown);
+                            break;
+                        case MenuMergePosition.Edit:
+                            ToolStripManager.Merge(mergingMenu.ToolStrip, mnuEdit.DropDown);
+                            break;
+                        case MenuMergePosition.View:
+                            ToolStripManager.Merge(mergingMenu.ToolStrip, mnuView.DropDown);
+                            break;
+                        case MenuMergePosition.Tools:
+                            ToolStripManager.Merge(mergingMenu.ToolStrip, mnuTools.DropDown);
+                            break;
+                        case MenuMergePosition.Help:
+                            ToolStripManager.Merge(mergingMenu.ToolStrip, mnuHelp.DropDown);
+                            break;
+                    }
+                }
+            }
+        }
+
+        public void RevertMerge(WindowTools windowTools)
+        {
+            if (windowTools?.IsEmpty ?? true)
+            {
+                return;
+            }
+
+            if (windowTools.MergingToolbar != null && windowTools.MergingToolbar.NeedHide)
+            {
+                windowTools.MergingToolbar.ToolStrip.Show();
+                ToolStripManager.RevertMerge(this.mainToolStrip, windowTools.MergingToolbar.ToolStrip);
+            }
+
+            if (windowTools.MergingMenus != null &&
+                windowTools.MergingMenus.Count() > 0)
+            {
+                foreach (var mergingMenu in windowTools.MergingMenus)
+                {
+                    if (mergingMenu.NeedHide)
+                    {
+                        switch (mergingMenu.Position)
+                        {
+                            case MenuMergePosition.File:
+                                ToolStripManager.RevertMerge(mnuFile.DropDown, mergingMenu.ToolStrip);
+                                break;
+                            case MenuMergePosition.Edit:
+                                ToolStripManager.RevertMerge(mnuEdit.DropDown, mergingMenu.ToolStrip);
+                                break;
+                            case MenuMergePosition.View:
+                                ToolStripManager.RevertMerge(mnuView.DropDown, mergingMenu.ToolStrip);
+                                break;
+                            case MenuMergePosition.Tools:
+                                ToolStripManager.RevertMerge(mnuTools.DropDown, mergingMenu.ToolStrip);
+                                break;
+                            case MenuMergePosition.Help:
+                                ToolStripManager.RevertMerge(mnuHelp.DropDown, mergingMenu.ToolStrip);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion Public Methods
 
         #region Protected Methods
 

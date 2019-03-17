@@ -1,4 +1,4 @@
-﻿namespace Neatly.Windows
+﻿namespace Neatly.Sdk.Windows
 {
     partial class BaseWindow
     {

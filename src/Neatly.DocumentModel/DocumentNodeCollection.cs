@@ -11,6 +11,7 @@ namespace Neatly.DocumentModel
 {
     public abstract class DocumentNodeCollection : PropertyChangedNotifier, INode
     {
+        protected Guid id = Guid.NewGuid();
         protected string title;
         protected DateTime dateCreated;
         protected DateTime? dateLastModified;
@@ -76,6 +77,19 @@ namespace Neatly.DocumentModel
                 {
                     dateLastModified = value;
                     OnPropertyChanged(nameof(DateLastModified));
+                }
+            }
+        }
+
+        public Guid Id
+        {
+            get => id;
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged(nameof(Id));
                 }
             }
         }

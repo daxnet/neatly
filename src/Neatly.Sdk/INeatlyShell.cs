@@ -1,4 +1,5 @@
 ﻿using Neatly.DocumentModel;
+using Neatly.Sdk.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,9 @@ namespace Neatly.Sdk
         NeatlyWorkspace Workspace { get; }
 
         IDocumentNavigator DocumentNavigator { get; }
+
+        void MergeTools(WindowTools windowTools);
+
+        void RevertMerge(WindowTools windowTools);
     }
 }
