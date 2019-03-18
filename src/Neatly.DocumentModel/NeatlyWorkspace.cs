@@ -21,9 +21,31 @@ namespace Neatly.DocumentModel
             PreserveReferencesHandling = PreserveReferencesHandling.Objects
         };
 
+        public event EventHandler<NodeEventArgs> NodeOpened;
+
+        public event EventHandler<NodeEventArgs> NodeSelected;
+
         protected override string WorkspaceFileDescription => Resources.Workspace_FileDescription;
 
         protected override string WorkspaceFileExtension => "ndoc";
+
+        /// <summary>
+        /// Opens a node in the current workspace.
+        /// </summary>
+        /// <param name="node">The node which needs to be opened.</param>
+        public void OpenNode(INode node)
+        {
+            NodeOpened?.Invoke(this, new NodeEventArgs(node));
+        }
+
+        /// <summary>
+        /// Selects a node in the current workspace.
+        /// </summary>
+        /// <param name="node">The node which needs to be selected.</param>
+        public void SelectNode(INode node)
+        {
+            NodeSelected?.Invoke(this, new NodeEventArgs(node));
+        }
 
         protected override (bool, Document) Create(WorkspaceModelEnricher<Document> enricher)
         {

@@ -56,6 +56,7 @@ namespace Neatly
             Workspace.WorkspaceSaved += Workspace_WorkspaceSaved;
             Workspace.WorkspaceChanged += Workspace_WorkspaceChanged;
             Workspace.WorkspaceClosed += Workspace_WorkspaceClosed;
+            Workspace.NodeOpened += Workspace_NodeOpened;
 
             // Initialize Windows.
             windowManager = new WindowManager(this);
@@ -63,6 +64,15 @@ namespace Neatly
             windowManager.WindowShown += WindowManager_WindowShown;
             documentNavigator = windowManager.CreateWindow<DocumentNavigator>();
             documentNavigator.Show(dockPanel, DockState.DockLeft);
+        }
+
+        private void Workspace_NodeOpened(object sender, NodeEventArgs e)
+        {
+            if (e.Node.Type == NodeType.DocumentNode)
+            {
+                var editorWindow = this.windowManager.CreateWindow<Editor>(e.Node);
+                editorWindow.Show(dockPanel, DockState.Document);
+            }
         }
 
         #endregion Public Constructors
@@ -206,6 +216,7 @@ namespace Neatly
             Workspace.WorkspaceCreated -= Workspace_WorkspaceCreated;
             Workspace.WorkspaceOpened -= Workspace_WorkspaceOpened;
             Workspace.WorkspaceSaved -= Workspace_WorkspaceSaved;
+            Workspace.NodeOpened -= Workspace_NodeOpened;
 
             newDocumentAction.Dispose();
             openDocumentAction.Dispose();
@@ -310,6 +321,8 @@ namespace Neatly
         private void Workspace_WorkspaceCreated(object sender, WorkspaceCreatedEventArgs<Document> e)
         {
             State = ShellState.WorkspaceCreated;
+            var articleNode = e.Model.ChildNodes.First();
+            Workspace.OpenNode(articleNode);
         }
 
         private void Workspace_WorkspaceOpened(object sender, WorkspaceOpenedEventArgs<Document> e)

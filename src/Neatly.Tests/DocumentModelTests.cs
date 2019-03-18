@@ -156,5 +156,28 @@ namespace Neatly.Tests
             doc.Remove(chap1);
             Assert.AreEqual(1, counter);
         }
+
+        [TestMethod]
+        public void DocumentHierarchyTest1()
+        {
+            var doc = new Document("doc");
+            var documentNode = new DocumentNode("node1", "content1");
+            doc.Add(documentNode);
+            Assert.IsTrue(doc.ChildNodes.Count() == 1);
+            Assert.AreEqual(doc, documentNode.Parent);
+        }
+
+        [TestMethod]
+        public void DocumentHierarchyTest2()
+        {
+            var doc = new Document("doc");
+            var documentNode = new DocumentNode("node1", "content1");
+            var documentNodeChild = new DocumentNode("child1", "child1");
+            doc.Add(documentNode);
+            documentNode.Add(documentNodeChild);
+            Assert.AreEqual(documentNode, documentNodeChild.Parent);
+            Assert.AreEqual(doc, documentNode.Parent);
+            Assert.IsNull(doc.Parent);
+        }
     }
 }

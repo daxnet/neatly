@@ -13,11 +13,16 @@ namespace Neatly.DocumentModel
     public sealed class DocumentNode : DocumentNodeCollection
     {
         private string content;
-        private INode parent;
         
         private DocumentNode()
         {
             
+        }
+
+        public DocumentNode(string title, string content)
+        {
+            this.title = title;
+            this.content = content;
         }
 
         public DocumentNode(INode parent, string title)
@@ -27,12 +32,9 @@ namespace Neatly.DocumentModel
         }
 
         public DocumentNode(INode parent, string title, string content)
+            : this(title, content)
         {
-            this.parent = parent;
-            this.parent.Add(this);
-
-            this.title = title;
-            this.content = content;
+            parent.Add(this);
         }
 
         public string Content
@@ -49,8 +51,6 @@ namespace Neatly.DocumentModel
         }
 
         public override string ToString() => title;
-
-        public override INode Parent => parent;
 
         public override NodeType Type => NodeType.DocumentNode;
     }

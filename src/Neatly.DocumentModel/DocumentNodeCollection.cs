@@ -15,6 +15,7 @@ namespace Neatly.DocumentModel
         protected string title;
         protected DateTime dateCreated;
         protected DateTime? dateLastModified;
+        protected INode parent;
 
         #region Protected Fields
 
@@ -38,7 +39,14 @@ namespace Neatly.DocumentModel
 
         public int Count => children.Count;
 
-        public abstract INode Parent { get; }
+        public virtual INode Parent
+        {
+            get => parent;
+            internal set
+            {
+                parent = value;
+            }
+        }
 
         public abstract NodeType Type { get; }
 
@@ -98,7 +106,7 @@ namespace Neatly.DocumentModel
 
         #region Public Methods
 
-        void INode.Add(DocumentNode documentNode)
+        public void Add(DocumentNode documentNode)
         {
             if (documentNode == null)
             {
@@ -109,6 +117,7 @@ namespace Neatly.DocumentModel
                 throw new DocumentException("The specified Document Node has already existed.");
             }
 
+            documentNode.Parent = this;
             this.children.Add(documentNode);
         }
 

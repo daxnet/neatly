@@ -61,6 +61,7 @@
     <Compile Include="DocumentException.cs" />
     <Compile Include="DocumentNode.cs" />
     <Compile Include="DocumentNodeCollection.cs" />
+    <Compile Include="NodeEventArgs.cs" />
     <Compile Include="INode.cs" />
     <Compile Include="NeatlyWorkspace.cs" />
     <Compile Include="NodeType.cs" />

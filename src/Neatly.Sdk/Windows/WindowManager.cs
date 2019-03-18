@@ -30,6 +30,18 @@ namespace Neatly.Sdk.Windows
             return window;
         }
 
+        public TWindow CreateWindow<TWindow>(params object[] additionalArgs)
+            where TWindow : BaseWindow
+        {
+            var parms = new List<object> { shell };
+            parms.AddRange(additionalArgs);
+            var window = (TWindow)Activator.CreateInstance(typeof(TWindow), parms.ToArray());
+            window.DockWindowShown += Window_DockWindowShown;
+            window.DockWindowHidden += Window_DockWindowHidden;
+            this.managedWindows.Add(window);
+            return window;
+        }
+
         private void Window_DockWindowHidden(object sender, EventArgs e)
         {
             WindowHidden?.Invoke(sender, new WindowHiddenEventArgs((BaseWindow)sender));
@@ -45,6 +57,13 @@ namespace Neatly.Sdk.Windows
         {
             var window = managedWindows.FirstOrDefault(w => w.GetType() == typeof(TWindow));
             return (TWindow)window ?? CreateWindow<TWindow>();
+        }
+
+        public TWindow CreateOrReuseWindow<TWindow>(params object[] additionalArgs)
+            where TWindow : BaseWindow
+        {
+            var window = managedWindows.FirstOrDefault(w => w.GetType() == typeof(TWindow));
+            return (TWindow)window ?? CreateWindow<TWindow>(additionalArgs);
         }
 
         public IEnumerable<TWindow> GetWindows<TWindow>()
