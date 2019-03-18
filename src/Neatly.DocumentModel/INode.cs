@@ -13,9 +13,11 @@ namespace Neatly.DocumentModel
     {
         Guid Id { get; set; }
 
-        string Title { get; }
+        string Title { get; set; }
 
         NodeType Type { get; }
+
+        string Tag { get; set; }
 
         DateTime DateCreated { get; set; }
 

@@ -29,7 +29,7 @@ namespace Neatly
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            txtTitle.Text = $"NewDocument_{DateTime.Now.ToString("yyyyMMddhhmmss")}";
+            txtTitle.Text = $"New Document";
             txtAuthor.Text = Environment.UserName;
 
             txtTitle.SelectAll();
@@ -40,7 +40,7 @@ namespace Neatly
             Document.Description = txtDescription.Text;
             Document.Author = txtAuthor.Text;
 
-            new DocumentNode(Document, "Article 1");
+            Document.Add(new DocumentNode("New Article", string.Empty));
         }
     }
 }

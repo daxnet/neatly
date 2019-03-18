@@ -3,6 +3,7 @@ using Neatly.Framework.Workspaces;
 using Neatly.Sdk;
 using Neatly.Sdk.Windows;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Neatly.Windows
@@ -23,6 +24,21 @@ namespace Neatly.Windows
             Shell.Workspace.WorkspaceCreated += Workspace_WorkspaceCreated;
             Shell.Workspace.WorkspaceOpened += Workspace_WorkspaceOpened;
             Shell.Workspace.WorkspaceClosed += Workspace_WorkspaceClosed;
+            Shell.Workspace.NodeOpened += Workspace_NodeOpened;
+        }
+
+        private void Workspace_NodeOpened(object sender, NodeEventArgs e)
+        {
+            var treeNode = this.navigationTree.Nodes.Find(e.Node.Id.ToString(), true).FirstOrDefault();
+            if (treeNode != null)
+            {
+                if (treeNode.Parent != null)
+                {
+                    treeNode.Parent.Expand();
+                }
+
+                navigationTree.SelectedNode = treeNode;
+            }
         }
 
         #endregion Public Constructors
@@ -41,6 +57,7 @@ namespace Neatly.Windows
             Shell.Workspace.WorkspaceCreated -= Workspace_WorkspaceCreated;
             Shell.Workspace.WorkspaceClosed -= Workspace_WorkspaceClosed;
             Shell.Workspace.WorkspaceOpened -= Workspace_WorkspaceOpened;
+            Shell.Workspace.NodeOpened -= Workspace_NodeOpened;
         }
 
         #endregion Protected Methods
@@ -53,6 +70,7 @@ namespace Neatly.Windows
             {
                 var currentNode = treeNode.Nodes.Add(documentNode.Title);
                 currentNode.Tag = documentNode;
+                currentNode.Name = documentNode.Id.ToString();
 
                 foreach (var subDocumentNode in documentNode.ChildNodes)
                 {
@@ -63,6 +81,7 @@ namespace Neatly.Windows
             navigationTree.Nodes.Clear();
             var rootNode = navigationTree.Nodes.Add(document.Title);
             rootNode.Tag = document;
+            rootNode.Name = document.Id.ToString();
 
             foreach (var documentNode in document.ChildNodes)
             {

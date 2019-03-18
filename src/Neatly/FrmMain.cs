@@ -301,12 +301,22 @@ namespace Neatly
         }
         private void WindowManager_WindowHidden(object sender, WindowHiddenEventArgs e)
         {
-            documentNavigatorAction.Checked = false;
+            switch (e.Window)
+            {
+                case DocumentNavigator _:
+                    documentNavigatorAction.Checked = false;
+                    break;
+            }
         }
 
         private void WindowManager_WindowShown(object sender, WindowShownEventArgs e)
         {
-            documentNavigatorAction.Checked = true;
+            switch (e.Window)
+            {
+                case DocumentNavigator _:
+                    documentNavigatorAction.Checked = true;
+                    break;
+            }
         }
 
         private void Workspace_WorkspaceChanged(object sender, EventArgs e)
@@ -321,8 +331,8 @@ namespace Neatly
         private void Workspace_WorkspaceCreated(object sender, WorkspaceCreatedEventArgs<Document> e)
         {
             State = ShellState.WorkspaceCreated;
-            var articleNode = e.Model.ChildNodes.First();
-            Workspace.OpenNode(articleNode);
+            var newArticleNode = e.Model.GetChildDocumentNodesByTitle("New Article").First();
+            Workspace.OpenNode(newArticleNode);
         }
 
         private void Workspace_WorkspaceOpened(object sender, WorkspaceOpenedEventArgs<Document> e)
