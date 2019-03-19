@@ -24,21 +24,6 @@ namespace Neatly.Windows
             Shell.Workspace.WorkspaceCreated += Workspace_WorkspaceCreated;
             Shell.Workspace.WorkspaceOpened += Workspace_WorkspaceOpened;
             Shell.Workspace.WorkspaceClosed += Workspace_WorkspaceClosed;
-            Shell.Workspace.NodeOpened += Workspace_NodeOpened;
-        }
-
-        private void Workspace_NodeOpened(object sender, NodeEventArgs e)
-        {
-            var treeNode = this.navigationTree.Nodes.Find(e.Node.Id.ToString(), true).FirstOrDefault();
-            if (treeNode != null)
-            {
-                if (treeNode.Parent != null)
-                {
-                    treeNode.Parent.Expand();
-                }
-
-                navigationTree.SelectedNode = treeNode;
-            }
         }
 
         #endregion Public Constructors
@@ -57,7 +42,6 @@ namespace Neatly.Windows
             Shell.Workspace.WorkspaceCreated -= Workspace_WorkspaceCreated;
             Shell.Workspace.WorkspaceClosed -= Workspace_WorkspaceClosed;
             Shell.Workspace.WorkspaceOpened -= Workspace_WorkspaceOpened;
-            Shell.Workspace.NodeOpened -= Workspace_NodeOpened;
         }
 
         #endregion Protected Methods
@@ -97,11 +81,27 @@ namespace Neatly.Windows
         private void Workspace_WorkspaceCreated(object sender, WorkspaceCreatedEventArgs<Document> e)
         {
             BuildNavigationTree(e.Model);
+            var newArticleNode = e.Model.GetChildDocumentNodesByTitle("New Article").First();
+            SelectNodeOnNavigationTree(newArticleNode);
         }
 
         private void Workspace_WorkspaceOpened(object sender, WorkspaceOpenedEventArgs<Document> e)
         {
             BuildNavigationTree(e.Model);
+        }
+
+        private void SelectNodeOnNavigationTree(INode node)
+        {
+            var treeNode = this.navigationTree.Nodes.Find(node.Id.ToString(), true).FirstOrDefault();
+            if (treeNode != null)
+            {
+                if (treeNode.Parent != null)
+                {
+                    treeNode.Parent.Expand();
+                }
+
+                navigationTree.SelectedNode = treeNode;
+            }
         }
 
         #endregion Private Methods

@@ -41,7 +41,7 @@
             this.navigationTree.HideSelection = false;
             this.navigationTree.Location = new System.Drawing.Point(0, 25);
             this.navigationTree.Name = "navigationTree";
-            this.navigationTree.Size = new System.Drawing.Size(618, 484);
+            this.navigationTree.Size = new System.Drawing.Size(388, 445);
             this.navigationTree.TabIndex = 0;
             // 
             // toolStrip
@@ -50,7 +50,7 @@
             this.toolStripButton1});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(618, 25);
+            this.toolStrip.Size = new System.Drawing.Size(388, 25);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip";
             // 
@@ -67,7 +67,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 509);
+            this.ClientSize = new System.Drawing.Size(388, 470);
             this.Controls.Add(this.navigationTree);
             this.Controls.Add(this.toolStrip);
             this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
