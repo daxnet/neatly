@@ -37,5 +37,10 @@ namespace Neatly.Windows
             base.OnLoad(e);
             Text = documentNode.Title;
         }
+
+        private void WebEditor_HtmlContentChanged(object sender, EventArgs e)
+        {
+            documentNode.Content = webEditor.HtmlContent;
+        }
     }
 }

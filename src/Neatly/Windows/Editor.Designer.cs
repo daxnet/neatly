@@ -28,25 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.webEditor1 = new Neatly.Controls.WebEditor();
+            this.webEditor = new Neatly.Controls.WebEditor();
             this.SuspendLayout();
             // 
-            // webEditor1
+            // webEditor
             // 
-            this.webEditor1.ChangeCheckingInterval = 0;
-            this.webEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webEditor1.Location = new System.Drawing.Point(0, 0);
-            this.webEditor1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webEditor1.Name = "webEditor1";
-            this.webEditor1.Size = new System.Drawing.Size(800, 450);
-            this.webEditor1.TabIndex = 0;
+            this.webEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webEditor.IsWebBrowserContextMenuEnabled = false;
+            this.webEditor.Location = new System.Drawing.Point(0, 0);
+            this.webEditor.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webEditor.Name = "webEditor";
+            this.webEditor.Size = new System.Drawing.Size(800, 450);
+            this.webEditor.TabIndex = 0;
+            this.webEditor.HtmlContentChanged += new System.EventHandler(this.WebEditor_HtmlContentChanged);
             // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.webEditor1);
+            this.Controls.Add(this.webEditor);
             this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Editor";
             this.Text = "Editor";
@@ -56,6 +57,6 @@
 
         #endregion
 
-        private Controls.WebEditor webEditor1;
+        private Controls.WebEditor webEditor;
     }
 }

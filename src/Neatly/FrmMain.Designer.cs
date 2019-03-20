@@ -43,16 +43,16 @@
             this.mnuSaveDocument = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuCloseDocument = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuView = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDocumentNavigator = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuTools = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mainToolStrip = new System.Windows.Forms.ToolStrip();
             this.tbtnNewDocument = new System.Windows.Forms.ToolStripButton();
             this.tbtnOpenDocument = new System.Windows.Forms.ToolStripButton();
             this.tbtnSaveDocument = new System.Windows.Forms.ToolStripButton();
             this.dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-            this.mnuEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuTools = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.mainToolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -151,6 +151,11 @@
             this.mnuCloseDocument.Name = "mnuCloseDocument";
             resources.ApplyResources(this.mnuCloseDocument, "mnuCloseDocument");
             // 
+            // mnuEdit
+            // 
+            this.mnuEdit.Name = "mnuEdit";
+            resources.ApplyResources(this.mnuEdit, "mnuEdit");
+            // 
             // mnuView
             // 
             this.mnuView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -163,6 +168,11 @@
             this.mnuDocumentNavigator.Image = global::Neatly.Properties.Resources.application_side_tree;
             this.mnuDocumentNavigator.Name = "mnuDocumentNavigator";
             resources.ApplyResources(this.mnuDocumentNavigator, "mnuDocumentNavigator");
+            // 
+            // mnuTools
+            // 
+            this.mnuTools.Name = "mnuTools";
+            resources.ApplyResources(this.mnuTools, "mnuTools");
             // 
             // mnuHelp
             // 
@@ -204,16 +214,6 @@
             resources.ApplyResources(this.dockPanel, "dockPanel");
             this.dockPanel.DockBackColor = System.Drawing.SystemColors.AppWorkspace;
             this.dockPanel.Name = "dockPanel";
-            // 
-            // mnuEdit
-            // 
-            this.mnuEdit.Name = "mnuEdit";
-            resources.ApplyResources(this.mnuEdit, "mnuEdit");
-            // 
-            // mnuTools
-            // 
-            this.mnuTools.Name = "mnuTools";
-            resources.ApplyResources(this.mnuTools, "mnuTools");
             // 
             // FrmMain
             // 

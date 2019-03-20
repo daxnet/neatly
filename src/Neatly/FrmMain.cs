@@ -72,9 +72,6 @@ namespace Neatly
             {
                 var editorWindow = this.windowManager.CreateWindow<Editor>(e.Node);
                 editorWindow.Show(dockPanel, DockState.Document);
-
-                var editorWindow2 = this.windowManager.CreateWindow<Editor>(e.Node);
-                editorWindow2.Show(dockPanel, DockState.Document);
             }
         }
 
@@ -112,6 +109,9 @@ namespace Neatly
                     case ShellState.WorkspaceClosed:
                         this.saveDocumentAction.Enabled = false;
                         this.closeDocumentAction.Enabled = false;
+                        break;
+                    case ShellState.WorkspaceChanged:
+                        this.saveDocumentAction.Enabled = true;
                         break;
                 }
             }

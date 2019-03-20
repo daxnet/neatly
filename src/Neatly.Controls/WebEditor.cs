@@ -11,7 +11,7 @@ namespace Neatly.Controls
 {
     public sealed class WebEditor : WebBrowser
     {
-        private const int DefaultChangeCheckingInterval = 20;
+        private const int DefaultChangeCheckingInterval = 800;
         private readonly Timer timer = new Timer();
         private bool disposed;
         private string originalText;
@@ -26,9 +26,10 @@ namespace Neatly.Controls
             timer.Start();
         }
 
+        public event EventHandler HtmlContentChanged;
+
         private void Timer_Tick(object sender, EventArgs e)
         {
-            //timer.Stop();
             if (!string.Equals(originalText, DocumentText))
             {
                 originalText = DocumentText;
@@ -38,7 +39,15 @@ namespace Neatly.Controls
 
         private void OnTextChanged()
         {
+            HtmlContentChanged?.Invoke(this, EventArgs.Empty);
+        }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string HtmlContent
+        {
+            get => DocumentText;
+            set => DocumentText = value;
         }
 
         [Description("The interval of the timer, in milliseconds, for checking the changing of the content.")]
@@ -71,6 +80,8 @@ namespace Neatly.Controls
             {
                 if (disposing)
                 {
+                    this.timer.Stop();
+                    this.timer.Enabled = false;
                     this.timer.Tick -= Timer_Tick;
                     this.timer.Dispose();
                 }
