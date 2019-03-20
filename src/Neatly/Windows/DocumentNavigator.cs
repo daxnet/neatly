@@ -19,7 +19,7 @@ namespace Neatly.Windows
         {
             InitializeComponent();
 
-            tools = new WindowTools(new ToolStripMerge(toolStrip, false));
+            tools = new WindowTools(new ToolStripMerge(toolStrip));
 
             Shell.Workspace.WorkspaceCreated += Workspace_WorkspaceCreated;
             Shell.Workspace.WorkspaceOpened += Workspace_WorkspaceOpened;

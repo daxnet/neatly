@@ -28,35 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.webEditor1 = new Neatly.Controls.WebEditor();
             this.SuspendLayout();
             // 
-            // textBox1
+            // webEditor1
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(800, 450);
-            this.textBox1.TabIndex = 0;
+            this.webEditor1.ChangeCheckingInterval = 0;
+            this.webEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webEditor1.Location = new System.Drawing.Point(0, 0);
+            this.webEditor1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webEditor1.Name = "webEditor1";
+            this.webEditor1.Size = new System.Drawing.Size(800, 450);
+            this.webEditor1.TabIndex = 0;
             // 
             // Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.webEditor1);
             this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Editor";
             this.Text = "Editor";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private Controls.WebEditor webEditor1;
     }
 }

@@ -72,6 +72,9 @@ namespace Neatly
             {
                 var editorWindow = this.windowManager.CreateWindow<Editor>(e.Node);
                 editorWindow.Show(dockPanel, DockState.Document);
+
+                var editorWindow2 = this.windowManager.CreateWindow<Editor>(e.Node);
+                editorWindow2.Show(dockPanel, DockState.Document);
             }
         }
 

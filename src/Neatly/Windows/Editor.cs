@@ -21,6 +21,7 @@ namespace Neatly.Windows
             : base(shell)
         {
             InitializeComponent();
+
             if (node is DocumentNode docn)
             {
                 documentNode = docn;
