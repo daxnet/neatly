@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="FrmCreateDocument.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,4 +1,5 @@
-﻿using Neatly.Sdk;
+﻿using Neatly.Framework;
+using Neatly.Sdk;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,10 +10,9 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Neatly.Sdk.Windows
 {
-    public sealed class WindowManager : Component
+    public sealed class WindowManager : ComponentManager<BaseWindow>
     {
         private readonly INeatlyShell shell;
-        private readonly List<BaseWindow> managedWindows = new List<BaseWindow>();
         private bool disposed;
 
         public event EventHandler<WindowHiddenEventArgs> WindowHidden;
@@ -26,7 +26,7 @@ namespace Neatly.Sdk.Windows
             var window = (TWindow)Activator.CreateInstance(typeof(TWindow), this.shell);
             window.DockWindowShown += Window_DockWindowShown;
             window.DockWindowHidden += Window_DockWindowHidden;
-            this.managedWindows.Add(window);
+            this.Add(window);
             return window;
         }
 
@@ -38,7 +38,7 @@ namespace Neatly.Sdk.Windows
             var window = (TWindow)Activator.CreateInstance(typeof(TWindow), parms.ToArray());
             window.DockWindowShown += Window_DockWindowShown;
             window.DockWindowHidden += Window_DockWindowHidden;
-            this.managedWindows.Add(window);
+            this.Add(window);
             return window;
         }
 
@@ -55,40 +55,39 @@ namespace Neatly.Sdk.Windows
         public TWindow CreateOrReuseWindow<TWindow>()
             where TWindow : BaseWindow
         {
-            var window = managedWindows.FirstOrDefault(w => w.GetType() == typeof(TWindow));
+            var window = components.FirstOrDefault(w => w.GetType() == typeof(TWindow));
             return (TWindow)window ?? CreateWindow<TWindow>();
         }
 
         public TWindow CreateOrReuseWindow<TWindow>(params object[] additionalArgs)
             where TWindow : BaseWindow
         {
-            var window = managedWindows.FirstOrDefault(w => w.GetType() == typeof(TWindow));
+            var window = components.FirstOrDefault(w => w.GetType() == typeof(TWindow));
             return (TWindow)window ?? CreateWindow<TWindow>(additionalArgs);
         }
 
         public IEnumerable<TWindow> GetWindows<TWindow>()
             where TWindow : BaseWindow
         {
-            return (IEnumerable<TWindow>)managedWindows.Where(w => w.GetType() == typeof(TWindow));
+            return (IEnumerable<TWindow>)components.Where(w => w.GetType() == typeof(TWindow));
         }
 
         public IEnumerable<BaseWindow> GetWindows(Type windowType)
         {
-            return managedWindows.Where(w => w.GetType() == windowType);
+            return components.Where(w => w.GetType() == windowType);
         }
 
         protected override void Dispose(bool disposing)
         {
             if (!disposed)
             {
-                foreach (var window in managedWindows)
+                foreach (var window in components)
                 {
                     window.DockWindowHidden -= Window_DockWindowHidden;
                     window.DockWindowShown -= Window_DockWindowShown;
-                    window.Dispose();
                 }
 
-                managedWindows.Clear();
+                base.Dispose(disposing);
                 disposed = true;
             }
         }

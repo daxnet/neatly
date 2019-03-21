@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.webEditor = new Neatly.Controls.WebEditor();
+            this.webEditor = new Neatly.Controls.Editors.WebEditor();
             this.SuspendLayout();
             // 
             // webEditor
@@ -41,6 +41,7 @@
             this.webEditor.Size = new System.Drawing.Size(800, 450);
             this.webEditor.TabIndex = 0;
             this.webEditor.HtmlContentChanged += new System.EventHandler(this.WebEditor_HtmlContentChanged);
+            this.webEditor.EditorKeyDown += new System.EventHandler<Neatly.Controls.Editors.WebEditorKeyDownEventArgs>(this.WebEditor_EditorKeyDown);
             // 
             // Editor
             // 
@@ -57,6 +58,6 @@
 
         #endregion
 
-        private Controls.WebEditor webEditor;
+        private Controls.Editors.WebEditor webEditor;
     }
 }

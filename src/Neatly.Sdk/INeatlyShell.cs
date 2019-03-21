@@ -1,4 +1,5 @@
 ﻿using Neatly.DocumentModel;
+using Neatly.Framework;
 using Neatly.Sdk.Windows;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Neatly.Sdk
 
         NeatlyWorkspace Workspace { get; }
 
-        IDocumentNavigator DocumentNavigator { get; }
+        IActionComponentProvider ActionComponents { get; }
 
         void MergeTools(WindowTools windowTools);
 

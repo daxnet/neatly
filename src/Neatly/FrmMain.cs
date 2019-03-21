@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using Neatly.Sdk.Windows;
+using Neatly.Framework;
 
 namespace Neatly
 {
@@ -25,12 +26,8 @@ namespace Neatly
 
         private const float ResizeFactor = 0.8F;
 
-        private readonly ActionComponent closeDocumentAction;
+        private readonly ActionComponentManager actionComponentManager;
         private readonly DocumentNavigator documentNavigator;
-        private readonly ActionComponent documentNavigatorAction;
-        private readonly ActionComponent newDocumentAction;
-        private readonly ActionComponent openDocumentAction;
-        private readonly ActionComponent saveDocumentAction;
         private readonly WindowManager windowManager;
         private ShellState state;
 
@@ -43,11 +40,54 @@ namespace Neatly
             InitializeComponent();
 
             // Initialize Action Components.
-            newDocumentAction = new ActionComponent(this, mnuNewDocument, tbtnNewDocument, Resources.Tooltip_NewDocument, Action_NewDocument);
-            openDocumentAction = new ActionComponent(this, mnuOpenDocument, tbtnOpenDocument, Resources.Tooltip_OpenDocument, Action_OpenDocument);
-            saveDocumentAction = new ActionComponent(this, mnuSaveDocument, tbtnSaveDocument, Resources.Tooltip_SaveDocument, Action_SaveDocument);
-            closeDocumentAction = new ActionComponent(this, mnuCloseDocument, Resources.Tooltip_CloseDocument, Action_CloseDocument);
-            documentNavigatorAction = new ActionComponent(this, mnuDocumentNavigator, Resources.Tooltip_DocumentNavigator, Action_ShowHideWindow) { Tag = typeof(DocumentNavigator) };
+
+            this.actionComponentManager = new ActionComponentManager(this,
+                new[]
+                {
+                    // New
+                    new ActionComponent(Constants.NewDocumentAction,
+                        this,
+                        mnuNewDocument,
+                        tbtnNewDocument,
+                        Resources.Tooltip_NewDocument,
+                        Action_NewDocument,
+                        Keys.Control | Keys.N),
+
+                    // Open
+                    new ActionComponent(Constants.OpenDocumentAction,
+                        this,
+                        mnuOpenDocument,
+                        tbtnOpenDocument,
+                        Resources.Tooltip_OpenDocument,
+                        Action_OpenDocument,
+                        Keys.Control | Keys.O),
+
+                    // Save
+                    new ActionComponent(Constants.SaveDocumentAction,
+                        this,
+                        mnuSaveDocument,
+                        tbtnSaveDocument,
+                        Resources.Tooltip_SaveDocument,
+                        Action_SaveDocument,
+                        Keys.Control | Keys.S),
+
+                    // Close
+                    new ActionComponent(Constants.CloseDocumentAction,
+                        this,
+                        mnuCloseDocument,
+                        Resources.Tooltip_CloseDocument,
+                        Action_CloseDocument),
+
+                    // Document Navigator
+                    new ActionComponent(Constants.ToggleDocumentNavigatorAction,
+                        this,
+                        mnuDocumentNavigator,
+                        Resources.Tooltip_DocumentNavigator,
+                        Action_ShowHideWindow)
+                        {
+                            Tag = typeof(DocumentNavigator)
+                        }
+                });
 
             // Initialize Workspace.
             Workspace = new NeatlyWorkspace();
@@ -66,20 +106,9 @@ namespace Neatly
             documentNavigator.Show(dockPanel, DockState.DockLeft);
         }
 
-        private void Workspace_NodeOpened(object sender, NodeEventArgs e)
-        {
-            if (e.Node.Type == NodeType.DocumentNode)
-            {
-                var editorWindow = this.windowManager.CreateWindow<Editor>(e.Node);
-                editorWindow.Show(dockPanel, DockState.Document);
-            }
-        }
-
         #endregion Public Constructors
 
         #region Public Properties
-
-        public IDocumentNavigator DocumentNavigator => documentNavigator;
 
         public ShellState State
         {
@@ -90,34 +119,36 @@ namespace Neatly
                 switch (state)
                 {
                     case ShellState.ApplicationInitialized:
-                        this.newDocumentAction.Enabled = true;
-                        this.openDocumentAction.Enabled = true;
-                        this.saveDocumentAction.Enabled = false;
-                        this.closeDocumentAction.Enabled = false;
+                        GetAction(Constants.NewDocumentAction).Enabled = true;
+                        GetAction(Constants.OpenDocumentAction).Enabled = true;
+                        GetAction(Constants.SaveDocumentAction).Enabled = false;
+                        GetAction(Constants.CloseDocumentAction).Enabled = false;
                         break;
                     case ShellState.WorkspaceOpened:
-                        this.saveDocumentAction.Enabled = false;
-                        this.closeDocumentAction.Enabled = true;
+                        GetAction(Constants.SaveDocumentAction).Enabled = false;
+                        GetAction(Constants.CloseDocumentAction).Enabled = true;
                         break;
                     case ShellState.WorkspaceCreated:
-                        this.saveDocumentAction.Enabled = true;
-                        this.closeDocumentAction.Enabled = true;
+                        GetAction(Constants.SaveDocumentAction).Enabled = true;
+                        GetAction(Constants.CloseDocumentAction).Enabled = true;
                         break;
                     case ShellState.WorkspaceSaved:
-                        this.saveDocumentAction.Enabled = false;
+                        GetAction(Constants.SaveDocumentAction).Enabled = false;
                         break;
                     case ShellState.WorkspaceClosed:
-                        this.saveDocumentAction.Enabled = false;
-                        this.closeDocumentAction.Enabled = false;
+                        GetAction(Constants.SaveDocumentAction).Enabled = false;
+                        GetAction(Constants.CloseDocumentAction).Enabled = false;
                         break;
                     case ShellState.WorkspaceChanged:
-                        this.saveDocumentAction.Enabled = true;
+                        GetAction(Constants.SaveDocumentAction).Enabled = true;
                         break;
                 }
             }
         }
 
         public NeatlyWorkspace Workspace { get; }
+
+        public IActionComponentProvider ActionComponents => actionComponentManager;
 
         #endregion Public Properties
 
@@ -139,9 +170,9 @@ namespace Neatly
             if (windowTools.MergingMenus != null &&
                 windowTools.MergingMenus.Count() > 0)
             {
-                foreach(var mergingMenu in windowTools.MergingMenus)
+                foreach (var mergingMenu in windowTools.MergingMenus)
                 {
-                    switch(mergingMenu.Position)
+                    switch (mergingMenu.Position)
                     {
                         case MenuMergePosition.File:
                             ToolStripManager.Merge(mergingMenu.ToolStrip, mnuFile.DropDown);
@@ -221,9 +252,7 @@ namespace Neatly
             Workspace.WorkspaceSaved -= Workspace_WorkspaceSaved;
             Workspace.NodeOpened -= Workspace_NodeOpened;
 
-            newDocumentAction.Dispose();
-            openDocumentAction.Dispose();
-            saveDocumentAction.Dispose();
+            actionComponentManager.Dispose();
 
             windowManager.WindowHidden -= WindowManager_WindowHidden;
             windowManager.WindowShown -= WindowManager_WindowShown;
@@ -302,12 +331,15 @@ namespace Neatly
                 }
             }
         }
+
+        private ActionComponent GetAction(string name) => actionComponentManager.Get(name);
+
         private void WindowManager_WindowHidden(object sender, WindowHiddenEventArgs e)
         {
             switch (e.Window)
             {
                 case DocumentNavigator _:
-                    documentNavigatorAction.Checked = false;
+                    GetAction(Constants.ToggleDocumentNavigatorAction).Checked = false;
                     break;
             }
         }
@@ -317,11 +349,19 @@ namespace Neatly
             switch (e.Window)
             {
                 case DocumentNavigator _:
-                    documentNavigatorAction.Checked = true;
+                    GetAction(Constants.ToggleDocumentNavigatorAction).Checked = true;
                     break;
             }
         }
 
+        private void Workspace_NodeOpened(object sender, NodeEventArgs e)
+        {
+            if (e.Node.Type == NodeType.DocumentNode)
+            {
+                var editorWindow = this.windowManager.CreateWindow<Editor>(e.Node);
+                editorWindow.Show(dockPanel, DockState.Document);
+            }
+        }
         private void Workspace_WorkspaceChanged(object sender, EventArgs e)
         {
             State = ShellState.WorkspaceChanged;

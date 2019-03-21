@@ -1,4 +1,5 @@
-﻿using Neatly.DocumentModel;
+﻿using Neatly.Controls.Editors;
+using Neatly.DocumentModel;
 using Neatly.Sdk;
 using Neatly.Sdk.Windows;
 using System;
@@ -41,6 +42,18 @@ namespace Neatly.Windows
         private void WebEditor_HtmlContentChanged(object sender, EventArgs e)
         {
             documentNode.Content = webEditor.HtmlContent;
+        }
+
+        private void WebEditor_EditorKeyDown(object sender, WebEditorKeyDownEventArgs e)
+        {
+            var actionComponent = Shell.ActionComponents.Get(e.EventData.KeyData, false);
+            if (actionComponent != null)
+            {
+                actionComponent.Invoke();
+                
+            }
+
+            e.CancelPreviewKeyDownEvent = true;
         }
     }
 }

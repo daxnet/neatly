@@ -55,6 +55,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionComponent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ActionComponentManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ComponentManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Disposer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -68,6 +77,7 @@
     <Compile Include="Extensions\ExternalResourceManager.cs" />
     <Compile Include="Extensions\IExtensionSettings.cs" />
     <Compile Include="Extensions\IResource.cs" />
+    <Compile Include="IActionComponentProvider.cs" />
     <Compile Include="LengthyOperation.cs" />
     <Compile Include="NeatlyException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

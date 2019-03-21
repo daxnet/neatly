@@ -52,11 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActionComponent.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Editors\WebEditorKeyDownEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebEditor.cs">
+    <Compile Include="Editors\WebEditor.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
