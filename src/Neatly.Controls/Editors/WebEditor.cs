@@ -155,13 +155,14 @@ namespace Neatly.Controls.Editors
         private void ShortcutKeyCheckingTimer_Tick(object sender, EventArgs e)
         {
             if (previewKeyDownEventArgs != null && 
+                (previewKeyDownEventArgs.KeyCode >= Keys.F1 && previewKeyDownEventArgs.KeyCode <= Keys.F24) || (
                 previewKeyDownEventArgs.Modifiers != Keys.None &&
                 previewKeyDownEventArgs.KeyCode != Keys.Control &&
                 previewKeyDownEventArgs.KeyCode != Keys.ControlKey &&
                 previewKeyDownEventArgs.KeyCode != Keys.Alt &&
                 previewKeyDownEventArgs.KeyCode != Keys.Menu &&
                 previewKeyDownEventArgs.KeyCode != Keys.Shift &&
-                previewKeyDownEventArgs.KeyCode != Keys.ShiftKey)
+                previewKeyDownEventArgs.KeyCode != Keys.ShiftKey))
             {
                 var handler = EditorKeyDown;
                 if (handler != null)

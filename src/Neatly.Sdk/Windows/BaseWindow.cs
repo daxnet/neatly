@@ -18,17 +18,17 @@ namespace Neatly.Sdk.Windows
         private BaseWindow()
         {
             InitializeComponent();
-            this.HideOnClose = true;
         }
 
         public event EventHandler DockWindowShown;
 
         public event EventHandler DockWindowHidden;
 
-        protected BaseWindow(INeatlyShell shell)
+        protected BaseWindow(INeatlyShell shell, bool hideOnClose = true)
             : this()
         {
-            this.Shell = shell;
+            Shell = shell;
+            HideOnClose = hideOnClose;
         }
 
         protected override void OnDockStateChanged(EventArgs e)
@@ -50,6 +50,20 @@ namespace Neatly.Sdk.Windows
 
         protected virtual WindowTools Tools => WindowTools.Empty;
 
+        protected virtual void Cleanup() { }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            // If the setting is to close the window instead of hiding, we need
+            // to cleanup the resources as the form is going to be closed and disposed.
+            if (!HideOnClose)
+            {
+                Cleanup();
+            }
+
+            base.OnFormClosing(e);
+        }
+
         protected virtual void OnDockWindowHidden(EventArgs e)
         {
             DockWindowHidden?.Invoke(this, e);
@@ -68,9 +82,6 @@ namespace Neatly.Sdk.Windows
             }
         }
 
-        public override string ToString()
-        {
-            return this.Text;
-        }
+        public override string ToString() => this.Text;
     }
 }

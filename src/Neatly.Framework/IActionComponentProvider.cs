@@ -9,7 +9,11 @@ namespace Neatly.Framework
 {
     public interface IActionComponentProvider
     {
+        #region Public Methods
+
         ActionComponent Get(string name);
         ActionComponent Get(Keys shortcutKeys, bool throwIfNotFound = true);
+
+        #endregion Public Methods
     }
 }
