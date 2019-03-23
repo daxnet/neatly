@@ -261,7 +261,14 @@ namespace Neatly
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            e.Cancel = !this.Workspace.Close();
+            if (Workspace.IsActive)
+            {
+                e.Cancel = !this.Workspace.Close();
+            }
+            else
+            {
+                e.Cancel = false;
+            }
         }
 
         protected override void OnLoad(EventArgs e)
@@ -370,6 +377,7 @@ namespace Neatly
         private void Workspace_WorkspaceClosed(object sender, EventArgs e)
         {
             State = ShellState.WorkspaceClosed;
+            windowManager.CloseWindows<Editor>();
         }
         private void Workspace_WorkspaceCreated(object sender, WorkspaceCreatedEventArgs<Document> e)
         {

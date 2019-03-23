@@ -42,6 +42,22 @@ namespace Neatly.Sdk.Windows
             return window;
         }
 
+        public void CloseWindows<TWindow>()
+            where TWindow : BaseWindow
+        {
+            var windows = components.Where(c => c is TWindow).Select(c => (TWindow)c).ToList();
+            foreach(var window in windows)
+            {
+                window.Close();
+                // If the window is closed instead of hid, means it has been disposed,
+                // then remove it from the components list.
+                if (!window.HideOnClose)
+                {
+                    components.Remove(window);
+                }
+            }
+        }
+
         private void Window_DockWindowHidden(object sender, EventArgs e)
         {
             WindowHidden?.Invoke(sender, new WindowHiddenEventArgs((BaseWindow)sender));
@@ -85,6 +101,10 @@ namespace Neatly.Sdk.Windows
                 {
                     window.DockWindowHidden -= Window_DockWindowHidden;
                     window.DockWindowShown -= Window_DockWindowShown;
+                    if (window.HideOnClose)
+                    {
+                        window.Cleanup();
+                    }
                 }
 
                 base.Dispose(disposing);

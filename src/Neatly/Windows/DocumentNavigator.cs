@@ -105,5 +105,10 @@ namespace Neatly.Windows
         }
 
         #endregion Private Methods
+
+        protected override void Cleanup()
+        {
+            base.Cleanup();
+        }
     }
 }

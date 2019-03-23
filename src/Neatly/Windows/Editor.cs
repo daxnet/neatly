@@ -19,7 +19,7 @@ namespace Neatly.Windows
         private readonly DocumentNode documentNode;
 
         public Editor(INeatlyShell shell, INode node)
-            : base(shell)
+            : base(shell, false)
         {
             InitializeComponent();
 
@@ -42,6 +42,11 @@ namespace Neatly.Windows
         private void WebEditor_HtmlContentChanged(object sender, EventArgs e)
         {
             documentNode.Content = webEditor.HtmlContent;
+        }
+
+        protected override void Cleanup()
+        {
+            base.Cleanup();
         }
 
         private void WebEditor_EditorKeyDown(object sender, WebEditorKeyDownEventArgs e)

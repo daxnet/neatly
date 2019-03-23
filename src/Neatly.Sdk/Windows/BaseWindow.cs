@@ -50,7 +50,7 @@ namespace Neatly.Sdk.Windows
 
         protected virtual WindowTools Tools => WindowTools.Empty;
 
-        protected virtual void Cleanup() { }
+        internal protected virtual void Cleanup() { }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
