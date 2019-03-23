@@ -12,16 +12,60 @@ namespace Neatly.Sdk.Windows
 {
     public sealed class WindowManager : ComponentManager<BaseWindow>
     {
+        #region Private Fields
+
         private readonly INeatlyShell shell;
         private bool disposed;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
+        public WindowManager(INeatlyShell shell) => this.shell = shell;
+
+        #endregion Public Constructors
+
+        #region Public Events
 
         public event EventHandler<WindowHiddenEventArgs> WindowHidden;
         public event EventHandler<WindowShownEventArgs> WindowShown;
 
-        public WindowManager(INeatlyShell shell) => this.shell = shell;
+        #endregion Public Events
+
+        #region Public Methods
+
+        public void CloseWindows<TWindow>()
+            where TWindow : BaseWindow
+        {
+            var windows = components.Where(c => c is TWindow).Select(c => (TWindow)c).ToList();
+            foreach (var window in windows)
+            {
+                window.Close();
+                // If the window is closed instead of hid, means it has been disposed,
+                // then remove it from the components list.
+                if (!window.HideOnClose)
+                {
+                    components.Remove(window);
+                }
+            }
+        }
+
+        public TWindow CreateOrReuseWindow<TWindow>()
+            where TWindow : BaseWindow
+        {
+            var window = components.FirstOrDefault(w => w.GetType() == typeof(TWindow));
+            return (TWindow)window ?? CreateWindow<TWindow>();
+        }
+
+        public TWindow CreateOrReuseWindow<TWindow>(params object[] additionalArgs)
+            where TWindow : BaseWindow
+        {
+            var window = components.FirstOrDefault(w => w.GetType() == typeof(TWindow));
+            return (TWindow)window ?? CreateWindow<TWindow>(additionalArgs);
+        }
 
         public TWindow CreateWindow<TWindow>()
-            where TWindow : BaseWindow
+                                    where TWindow : BaseWindow
         {
             var window = (TWindow)Activator.CreateInstance(typeof(TWindow), this.shell);
             window.DockWindowShown += Window_DockWindowShown;
@@ -41,47 +85,6 @@ namespace Neatly.Sdk.Windows
             this.Add(window);
             return window;
         }
-
-        public void CloseWindows<TWindow>()
-            where TWindow : BaseWindow
-        {
-            var windows = components.Where(c => c is TWindow).Select(c => (TWindow)c).ToList();
-            foreach(var window in windows)
-            {
-                window.Close();
-                // If the window is closed instead of hid, means it has been disposed,
-                // then remove it from the components list.
-                if (!window.HideOnClose)
-                {
-                    components.Remove(window);
-                }
-            }
-        }
-
-        private void Window_DockWindowHidden(object sender, EventArgs e)
-        {
-            WindowHidden?.Invoke(sender, new WindowHiddenEventArgs((BaseWindow)sender));
-        }
-
-        private void Window_DockWindowShown(object sender, EventArgs e)
-        {
-            WindowShown?.Invoke(sender, new WindowShownEventArgs((BaseWindow)sender));
-        }
-
-        public TWindow CreateOrReuseWindow<TWindow>()
-            where TWindow : BaseWindow
-        {
-            var window = components.FirstOrDefault(w => w.GetType() == typeof(TWindow));
-            return (TWindow)window ?? CreateWindow<TWindow>();
-        }
-
-        public TWindow CreateOrReuseWindow<TWindow>(params object[] additionalArgs)
-            where TWindow : BaseWindow
-        {
-            var window = components.FirstOrDefault(w => w.GetType() == typeof(TWindow));
-            return (TWindow)window ?? CreateWindow<TWindow>(additionalArgs);
-        }
-
         public IEnumerable<TWindow> GetWindows<TWindow>()
             where TWindow : BaseWindow
         {
@@ -92,6 +95,10 @@ namespace Neatly.Sdk.Windows
         {
             return components.Where(w => w.GetType() == windowType);
         }
+
+        #endregion Public Methods
+
+        #region Protected Methods
 
         protected override void Dispose(bool disposing)
         {
@@ -111,5 +118,21 @@ namespace Neatly.Sdk.Windows
                 disposed = true;
             }
         }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
+        private void Window_DockWindowHidden(object sender, EventArgs e)
+        {
+            WindowHidden?.Invoke(sender, new WindowHiddenEventArgs((BaseWindow)sender));
+        }
+
+        private void Window_DockWindowShown(object sender, EventArgs e)
+        {
+            WindowShown?.Invoke(sender, new WindowShownEventArgs((BaseWindow)sender));
+        }
+
+        #endregion Private Methods
     }
 }

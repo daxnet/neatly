@@ -19,7 +19,7 @@ namespace Neatly.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -103,6 +103,16 @@ namespace Neatly.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap page_add {
+            get {
+                object obj = ResourceManager.GetObject("page_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap page_white {
             get {
                 object obj = ResourceManager.GetObject("page_white", resourceCulture);
@@ -115,7 +125,7 @@ namespace Neatly.Properties {
         /// </summary>
         internal static string Tooltip_CloseDocument {
             get {
-                return ResourceManager.GetString("Tooltip.CloseDocument", resourceCulture);
+                return ResourceManager.GetString("Tooltip_CloseDocument", resourceCulture);
             }
         }
         
@@ -124,7 +134,7 @@ namespace Neatly.Properties {
         /// </summary>
         internal static string Tooltip_DocumentNavigator {
             get {
-                return ResourceManager.GetString("Tooltip.DocumentNavigator", resourceCulture);
+                return ResourceManager.GetString("Tooltip_DocumentNavigator", resourceCulture);
             }
         }
         
@@ -133,7 +143,7 @@ namespace Neatly.Properties {
         /// </summary>
         internal static string Tooltip_NewDocument {
             get {
-                return ResourceManager.GetString("Tooltip.NewDocument", resourceCulture);
+                return ResourceManager.GetString("Tooltip_NewDocument", resourceCulture);
             }
         }
         
@@ -142,7 +152,7 @@ namespace Neatly.Properties {
         /// </summary>
         internal static string Tooltip_OpenDocument {
             get {
-                return ResourceManager.GetString("Tooltip.OpenDocument", resourceCulture);
+                return ResourceManager.GetString("Tooltip_OpenDocument", resourceCulture);
             }
         }
         
@@ -151,7 +161,7 @@ namespace Neatly.Properties {
         /// </summary>
         internal static string Tooltip_SaveDocument {
             get {
-                return ResourceManager.GetString("Tooltip.SaveDocument", resourceCulture);
+                return ResourceManager.GetString("Tooltip_SaveDocument", resourceCulture);
             }
         }
     }

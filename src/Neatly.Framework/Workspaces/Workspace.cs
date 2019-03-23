@@ -27,11 +27,14 @@ namespace Neatly.Framework.Workspaces
         /// </summary>
         protected Workspace()
         {
+            OnWorkspaceInitializing(EventArgs.Empty);
         }
 
         #endregion Protected Constructors
 
         #region Public Events
+
+        public event EventHandler WorkspaceInitializing;
 
         /// <summary>
         /// Occurs when the workspace has been modified.
@@ -332,6 +335,8 @@ namespace Neatly.Framework.Workspaces
         /// </summary>
         /// <returns>The workspace model that was created.</returns>
         protected abstract (bool, TModel) Create(WorkspaceModelEnricher<TModel> enricher = null);
+
+        protected virtual void OnWorkspaceInitializing(EventArgs e) => WorkspaceInitializing?.Invoke(this, e);
 
         /// <summary>
         /// Raises the <see cref="E:WorkspaceChanged" /> event.

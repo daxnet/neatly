@@ -127,25 +127,28 @@
   <data name="page_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\page_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Tooltip.NewDocument" xml:space="preserve">
+  <data name="Tooltip_NewDocument" xml:space="preserve">
     <value>Creates a new Neatly document.</value>
   </data>
-  <data name="Tooltip.OpenDocument" xml:space="preserve">
+  <data name="Tooltip_OpenDocument" xml:space="preserve">
     <value>Open an existing Neatly document.</value>
   </data>
-  <data name="Tooltip.SaveDocument" xml:space="preserve">
+  <data name="Tooltip_SaveDocument" xml:space="preserve">
     <value>Saves the current Neatly document.</value>
   </data>
   <data name="cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cross.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Tooltip.CloseDocument" xml:space="preserve">
+  <data name="Tooltip_CloseDocument" xml:space="preserve">
     <value>Closes the current Neatly document.</value>
   </data>
-  <data name="Tooltip.DocumentNavigator" xml:space="preserve">
+  <data name="Tooltip_DocumentNavigator" xml:space="preserve">
     <value>Shows or hides the document navigator.</value>
   </data>
   <data name="application_side_tree" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\application_side_tree.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="page_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\page_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

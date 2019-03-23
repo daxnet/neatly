@@ -1,4 +1,5 @@
 ﻿using Neatly.DocumentModel;
+using Neatly.Framework;
 using Neatly.Framework.Workspaces;
 using Neatly.Sdk;
 using Neatly.Sdk.Windows;
@@ -11,6 +12,7 @@ namespace Neatly.Windows
     public partial class DocumentNavigator : BaseWindow, IDocumentNavigator
     {
         private readonly WindowTools tools;
+        private readonly ActionComponentManager actions;
 
         #region Public Constructors
 
@@ -19,11 +21,23 @@ namespace Neatly.Windows
         {
             InitializeComponent();
 
-            tools = new WindowTools(new ToolStripMerge(toolStrip));
+            actions = new ActionComponentManager(this,
+                new[]
+                {
+                    new ActionComponent(Constants.AddArticleAction, this, mnuAddArticle, tbtnAddArticle, Action_AddArticle, Keys.Control | Keys.Shift | Keys.A)
+                });
 
+            tools = new WindowTools(new ToolStripMerge(toolStrip), new[] { new MenuStripMerge(ctxArticles, MenuMergePosition.Edit) });
+
+            Shell.Workspace.WorkspaceInitializing += Workspace_WorkspaceInitializing;
             Shell.Workspace.WorkspaceCreated += Workspace_WorkspaceCreated;
             Shell.Workspace.WorkspaceOpened += Workspace_WorkspaceOpened;
             Shell.Workspace.WorkspaceClosed += Workspace_WorkspaceClosed;
+        }
+
+        private void Workspace_WorkspaceInitializing(object sender, EventArgs e)
+        {
+            // throw new NotImplementedException();
         }
 
         #endregion Public Constructors
@@ -39,14 +53,17 @@ namespace Neatly.Windows
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             base.OnFormClosed(e);
-            Shell.Workspace.WorkspaceCreated -= Workspace_WorkspaceCreated;
-            Shell.Workspace.WorkspaceClosed -= Workspace_WorkspaceClosed;
-            Shell.Workspace.WorkspaceOpened -= Workspace_WorkspaceOpened;
+            
         }
 
         #endregion Protected Methods
 
         #region Private Methods
+
+        private void Action_AddArticle(object sender, EventArgs e)
+        {
+            
+        }
 
         private void BuildNavigationTree(Document document)
         {
@@ -108,7 +125,12 @@ namespace Neatly.Windows
 
         protected override void Cleanup()
         {
-            base.Cleanup();
+            Shell.Workspace.WorkspaceInitializing -= Workspace_WorkspaceInitializing;
+            Shell.Workspace.WorkspaceCreated -= Workspace_WorkspaceCreated;
+            Shell.Workspace.WorkspaceClosed -= Workspace_WorkspaceClosed;
+            Shell.Workspace.WorkspaceOpened -= Workspace_WorkspaceOpened;
+
+            actions.Dispose();
         }
     }
 }

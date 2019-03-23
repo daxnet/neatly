@@ -13,5 +13,7 @@ namespace Neatly
         public const string SaveDocumentAction = "SaveDocumentAction";
         public const string ToggleDocumentNavigatorAction = "ToggleDocumentNavigatorAction";
         public const string CloseDocumentAction = "CloseDocumentAction";
+
+        public const string AddArticleAction = "AddArticleAction";
     }
 }

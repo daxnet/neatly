@@ -28,11 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocumentNavigator));
             this.navigationTree = new System.Windows.Forms.TreeView();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.tbtnAddArticle = new System.Windows.Forms.ToolStripButton();
+            this.ctxArticles = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuAddArticle = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip.SuspendLayout();
+            this.ctxArticles.SuspendLayout();
             this.SuspendLayout();
             // 
             // navigationTree
@@ -47,23 +51,36 @@
             // toolStrip
             // 
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
+            this.tbtnAddArticle});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(388, 25);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "toolStrip";
             // 
-            // toolStripButton1
+            // tbtnAddArticle
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.MergeAction = System.Windows.Forms.MergeAction.Insert;
-            this.toolStripButton1.MergeIndex = 3;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.tbtnAddArticle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbtnAddArticle.Image = global::Neatly.Properties.Resources.page_add;
+            this.tbtnAddArticle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbtnAddArticle.MergeAction = System.Windows.Forms.MergeAction.Insert;
+            this.tbtnAddArticle.MergeIndex = 3;
+            this.tbtnAddArticle.Name = "tbtnAddArticle";
+            this.tbtnAddArticle.Size = new System.Drawing.Size(23, 22);
+            this.tbtnAddArticle.Text = "Add Article";
+            // 
+            // ctxArticles
+            // 
+            this.ctxArticles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuAddArticle});
+            this.ctxArticles.Name = "ctxArticles";
+            this.ctxArticles.Size = new System.Drawing.Size(181, 48);
+            // 
+            // mnuAddArticle
+            // 
+            this.mnuAddArticle.Name = "mnuAddArticle";
+            this.mnuAddArticle.Size = new System.Drawing.Size(180, 22);
+            this.mnuAddArticle.Text = "&Add Article";
             // 
             // DocumentNavigator
             // 
@@ -78,6 +95,7 @@
             this.Text = "Document Navigator";
             this.toolStrip.ResumeLayout(false);
             this.toolStrip.PerformLayout();
+            this.ctxArticles.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -87,6 +105,8 @@
 
         private System.Windows.Forms.TreeView navigationTree;
         private System.Windows.Forms.ToolStrip toolStrip;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton tbtnAddArticle;
+        private System.Windows.Forms.ContextMenuStrip ctxArticles;
+        private System.Windows.Forms.ToolStripMenuItem mnuAddArticle;
     }
 }
