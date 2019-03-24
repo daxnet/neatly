@@ -16,8 +16,6 @@ namespace Neatly.Windows
 {
     public partial class Editor : BaseWindow
     {
-        private readonly DocumentNode documentNode;
-
         public Editor(INeatlyShell shell, INode node)
             : base(shell, false)
         {
@@ -25,7 +23,7 @@ namespace Neatly.Windows
 
             if (node is DocumentNode docn)
             {
-                documentNode = docn;
+                DocumentNode = docn;
             }
             else
             {
@@ -33,15 +31,18 @@ namespace Neatly.Windows
             }
         }
 
+        public DocumentNode DocumentNode { get; }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            Text = documentNode.Title;
+            Text = DocumentNode.Title;
+            webEditor.HtmlContent = DocumentNode.Content;
         }
 
         private void WebEditor_HtmlContentChanged(object sender, EventArgs e)
         {
-            documentNode.Content = webEditor.HtmlContent;
+            DocumentNode.Content = webEditor.HtmlContent;
         }
 
         protected override void Cleanup()

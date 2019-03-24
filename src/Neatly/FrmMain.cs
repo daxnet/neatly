@@ -26,7 +26,7 @@ namespace Neatly
 
         private const float ResizeFactor = 0.8F;
 
-        private readonly ActionComponentManager actionComponentManager;
+        private readonly ActionComponentManager actions;
         private readonly DocumentNavigator documentNavigator;
         private readonly WindowManager windowManager;
         private ShellState state;
@@ -41,7 +41,7 @@ namespace Neatly
 
             // Initialize Action Components.
 
-            this.actionComponentManager = new ActionComponentManager(this,
+            this.actions = new ActionComponentManager(this,
                 new[]
                 {
                     // New
@@ -119,28 +119,28 @@ namespace Neatly
                 switch (state)
                 {
                     case ShellState.ApplicationInitialized:
-                        GetAction(Constants.NewDocumentAction).Enabled = true;
-                        GetAction(Constants.OpenDocumentAction).Enabled = true;
-                        GetAction(Constants.SaveDocumentAction).Enabled = false;
-                        GetAction(Constants.CloseDocumentAction).Enabled = false;
+                        actions[Constants.NewDocumentAction].Enabled = true;
+                        actions[Constants.OpenDocumentAction].Enabled = true;
+                        actions[Constants.SaveDocumentAction].Enabled = false;
+                        actions[Constants.CloseDocumentAction].Enabled = false;
                         break;
                     case ShellState.WorkspaceOpened:
-                        GetAction(Constants.SaveDocumentAction).Enabled = false;
-                        GetAction(Constants.CloseDocumentAction).Enabled = true;
+                        actions[Constants.SaveDocumentAction].Enabled = false;
+                        actions[Constants.CloseDocumentAction].Enabled = true;
                         break;
                     case ShellState.WorkspaceCreated:
-                        GetAction(Constants.SaveDocumentAction).Enabled = true;
-                        GetAction(Constants.CloseDocumentAction).Enabled = true;
+                        actions[Constants.SaveDocumentAction].Enabled = true;
+                        actions[Constants.CloseDocumentAction].Enabled = true;
                         break;
                     case ShellState.WorkspaceSaved:
-                        GetAction(Constants.SaveDocumentAction).Enabled = false;
+                        actions[Constants.SaveDocumentAction].Enabled = false;
                         break;
                     case ShellState.WorkspaceClosed:
-                        GetAction(Constants.SaveDocumentAction).Enabled = false;
-                        GetAction(Constants.CloseDocumentAction).Enabled = false;
+                        actions[Constants.SaveDocumentAction].Enabled = false;
+                        actions[Constants.CloseDocumentAction].Enabled = false;
                         break;
                     case ShellState.WorkspaceChanged:
-                        GetAction(Constants.SaveDocumentAction).Enabled = true;
+                        actions[Constants.SaveDocumentAction].Enabled = true;
                         break;
                 }
             }
@@ -148,7 +148,7 @@ namespace Neatly
 
         public NeatlyWorkspace Workspace { get; }
 
-        public IActionComponentProvider ActionComponents => actionComponentManager;
+        public IActionComponentProvider ActionComponents => actions;
 
         #endregion Public Properties
 
@@ -252,7 +252,7 @@ namespace Neatly
             Workspace.WorkspaceSaved -= Workspace_WorkspaceSaved;
             Workspace.NodeOpened -= Workspace_NodeOpened;
 
-            actionComponentManager.Dispose();
+            actions.Dispose();
 
             windowManager.WindowHidden -= WindowManager_WindowHidden;
             windowManager.WindowShown -= WindowManager_WindowShown;
@@ -339,14 +339,12 @@ namespace Neatly
             }
         }
 
-        private ActionComponent GetAction(string name) => actionComponentManager.Get(name);
-
         private void WindowManager_WindowHidden(object sender, WindowHiddenEventArgs e)
         {
             switch (e.Window)
             {
                 case DocumentNavigator _:
-                    GetAction(Constants.ToggleDocumentNavigatorAction).Checked = false;
+                    actions[Constants.ToggleDocumentNavigatorAction].Checked = false;
                     break;
             }
         }
@@ -356,7 +354,7 @@ namespace Neatly
             switch (e.Window)
             {
                 case DocumentNavigator _:
-                    GetAction(Constants.ToggleDocumentNavigatorAction).Checked = true;
+                    actions[Constants.ToggleDocumentNavigatorAction].Checked = true;
                     break;
             }
         }
@@ -365,10 +363,19 @@ namespace Neatly
         {
             if (e.Node.Type == NodeType.DocumentNode)
             {
-                var editorWindow = this.windowManager.CreateWindow<Editor>(e.Node);
-                editorWindow.Show(dockPanel, DockState.Document);
+                var editorWindow = this.windowManager.GetWindows<Editor>(editor => editor.DocumentNode.Id.Equals(e.Node.Id)).FirstOrDefault();
+                if (editorWindow != null)
+                {
+                    editorWindow.Show();
+                }
+                else
+                {
+                    editorWindow = this.windowManager.CreateWindow<Editor>(e.Node);
+                    editorWindow.Show(dockPanel, DockState.Document);
+                }
             }
         }
+
         private void Workspace_WorkspaceChanged(object sender, EventArgs e)
         {
             State = ShellState.WorkspaceChanged;

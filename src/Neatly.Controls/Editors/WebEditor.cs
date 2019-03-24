@@ -66,7 +66,13 @@ namespace Neatly.Controls.Editors
         public string HtmlContent
         {
             get => DocumentText;
-            set => DocumentText = value;
+            set
+            {
+                if (SetHtml(value))
+                {
+                    originalText = DocumentText;
+                }
+            }
         }
 
         [Description("The interval of the timer, in milliseconds, for checking the shortcut key press on the editor.")]
@@ -110,10 +116,24 @@ namespace Neatly.Controls.Editors
 
         #region Private Methods
 
+        private bool SetHtml(string htmlContent)
+        {
+            if (Document != null)
+            {
+                var doc = Document.DomDocument as IHTMLDocument2;
+                if (doc != null)
+                {
+                    doc.write(htmlContent);
+                    doc.close();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void ChangeCheckingTimer_Tick(object sender, EventArgs e)
         {
-
-
             // Note: accessing DocumentText property will result in the construction of the MemoryStream
             // object. From Reference Source, it looks like this MemoryStream object will never be getting
             // disposed. Not sure if there will be memory leak at this point. Assume that GC will take care

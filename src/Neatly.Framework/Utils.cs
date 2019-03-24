@@ -30,6 +30,11 @@ namespace Neatly.Framework
             return permissionSet.IsSubsetOf(AppDomain.CurrentDomain.PermissionSet);
         }
 
+        //public static string GetUniqueName(string prefix, IEnumerable<string> existingNames)
+        //{
+        //    const string Pattern = @"";
+        //}
+
         #endregion Public Methods
     }
 }

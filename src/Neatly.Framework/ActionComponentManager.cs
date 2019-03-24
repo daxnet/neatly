@@ -57,6 +57,8 @@ namespace Neatly.Framework
             return action;
         }
 
+        public ActionComponent this[string name] => Get(name);
+
         /// <summary>
         /// Gets the action component by name.
         /// </summary>

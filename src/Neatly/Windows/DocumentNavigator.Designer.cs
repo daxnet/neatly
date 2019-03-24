@@ -35,6 +35,7 @@
             this.tbtnAddArticle = new System.Windows.Forms.ToolStripButton();
             this.ctxArticles = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuAddArticle = new System.Windows.Forms.ToolStripMenuItem();
+            this.navigationTreeImgList = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip.SuspendLayout();
             this.ctxArticles.SuspendLayout();
             this.SuspendLayout();
@@ -43,10 +44,18 @@
             // 
             this.navigationTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.navigationTree.HideSelection = false;
+            this.navigationTree.ImageIndex = 0;
+            this.navigationTree.ImageList = this.navigationTreeImgList;
             this.navigationTree.Location = new System.Drawing.Point(0, 25);
             this.navigationTree.Name = "navigationTree";
+            this.navigationTree.SelectedImageIndex = 0;
             this.navigationTree.Size = new System.Drawing.Size(388, 445);
             this.navigationTree.TabIndex = 0;
+            this.navigationTree.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.navigationTree_BeforeCollapse);
+            this.navigationTree.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.navigationTree_BeforeExpand);
+            this.navigationTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.navigationTree_AfterSelect);
+            this.navigationTree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.navigationTree_NodeMouseDoubleClick);
+            this.navigationTree.MouseDown += new System.Windows.Forms.MouseEventHandler(this.navigationTree_MouseDown);
             // 
             // toolStrip
             // 
@@ -74,13 +83,20 @@
             this.ctxArticles.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuAddArticle});
             this.ctxArticles.Name = "ctxArticles";
-            this.ctxArticles.Size = new System.Drawing.Size(181, 48);
+            this.ctxArticles.Size = new System.Drawing.Size(141, 26);
             // 
             // mnuAddArticle
             // 
             this.mnuAddArticle.Name = "mnuAddArticle";
-            this.mnuAddArticle.Size = new System.Drawing.Size(180, 22);
+            this.mnuAddArticle.Size = new System.Drawing.Size(140, 22);
             this.mnuAddArticle.Text = "&Add Article";
+            // 
+            // navigationTreeImgList
+            // 
+            this.navigationTreeImgList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("navigationTreeImgList.ImageStream")));
+            this.navigationTreeImgList.TransparentColor = System.Drawing.Color.Transparent;
+            this.navigationTreeImgList.Images.SetKeyName(0, "document");
+            this.navigationTreeImgList.Images.SetKeyName(1, "article");
             // 
             // DocumentNavigator
             // 
@@ -108,5 +124,6 @@
         private System.Windows.Forms.ToolStripButton tbtnAddArticle;
         private System.Windows.Forms.ContextMenuStrip ctxArticles;
         private System.Windows.Forms.ToolStripMenuItem mnuAddArticle;
+        private System.Windows.Forms.ImageList navigationTreeImgList;
     }
 }

@@ -11,8 +11,14 @@ using System.Threading.Tasks;
 
 namespace Neatly.DocumentModel
 {
+    /// <summary>
+    /// Represents the Neatly workspace.
+    /// </summary>
+    /// <seealso cref="Neatly.Framework.Workspaces.Workspace{Neatly.DocumentModel.Document}" />
     public sealed class NeatlyWorkspace : Workspace<Document>
     {
+        #region Private Fields
+
         private static readonly JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.All,
@@ -21,13 +27,46 @@ namespace Neatly.DocumentModel
             PreserveReferencesHandling = PreserveReferencesHandling.Objects
         };
 
+        #endregion Private Fields
+
+        #region Public Events
+
+        /// <summary>
+        /// Occurs when the node has been opened.
+        /// </summary>
         public event EventHandler<NodeEventArgs> NodeOpened;
 
+        /// <summary>
+        /// Occurs when the node has been selected.
+        /// </summary>
         public event EventHandler<NodeEventArgs> NodeSelected;
 
+        public event EventHandler<DocumentNodeAddedEventArgs> DocumentNodeAdded;
+
+        #endregion Public Events
+
+        #region Protected Properties
+
+        /// <summary>
+        /// Gets the description of the workspace file.
+        /// </summary>
+        /// <value>
+        /// The workspace file description.
+        /// </value>
         protected override string WorkspaceFileDescription => Resources.Workspace_FileDescription;
 
+        /// <summary>
+        /// Gets the file name extension of the workspace files. For example, "txt" or "csv", if
+        /// the workspace is saved in .txt or .csv extensions.
+        /// </summary>
+        /// <value>
+        /// The workspace file extension.
+        /// </value>
         protected override string WorkspaceFileExtension => "ndoc";
+
+        #endregion Protected Properties
+
+        #region Public Methods
 
         /// <summary>
         /// Opens a node in the current workspace.
@@ -46,6 +85,27 @@ namespace Neatly.DocumentModel
         {
             NodeSelected?.Invoke(this, new NodeEventArgs(node));
         }
+
+        public void AddDocumentNode(INode parent, string title, string content)
+        {
+            var documentNode = new DocumentNode(title, content);
+            AddDocumentNode(parent, documentNode);
+        }
+
+        /// <summary>
+        /// Adds the document node under the specified parent.
+        /// </summary>
+        /// <param name="parent">The parent node to which the document node should be added.</param>
+        /// <param name="documentNode">The document node to be added.</param>
+        public void AddDocumentNode(INode parent, DocumentNode documentNode)
+        {
+            parent.Add(documentNode);
+            this.DocumentNodeAdded?.Invoke(this, new DocumentNodeAddedEventArgs(parent, documentNode));
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
 
         protected override (bool, Document) Create(WorkspaceModelEnricher<Document> enricher)
         {
@@ -101,5 +161,7 @@ namespace Neatly.DocumentModel
                 }
             }
         }
+
+        #endregion Protected Methods
     }
 }
